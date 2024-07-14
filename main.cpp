@@ -29,26 +29,46 @@ int32_t main()
      faster();
      testCase
      {
-         int n,k;
-         cin>>n>>k;
-         vi v(k);
-         int cnt1=0;
-         for(auto &i:v)
-         {
-            cin>>i;
-            
-         }
-         sort(v.begin(),v.end());
-         int op=0;
-         for(int i=0;i<k-1;i++)
-         {
-          if(v[i]>1)
-          {
-               op+=v[i]-1;
-          }
-         }
-         op+=(n-v[k-1]);
-         cout<<op<<endl;
+        int n;
+        cin>>n;
+        vi v(n);
+        for(auto &i:v)
+        {
+           cin>>i;
+        }
+        int andsum=v[0];
+        for(int i=1;i<n;i++)
+        {
+           andsum&=v[i];
+        }
+        if(andsum>0)
+        {
+          cout<<"1"<<endl;
+        }
+        else
+        {
+          int sum=v[0];
+          int cnt=0;
+
+           for(int i=1;i<n;i++)
+           {
+               if(sum==0)
+               {
+                    cnt++;
+                    sum=v[i];
+               }
+               else
+               {
+                     sum&=v[i];
+               }
+           }
+           if(sum==0)
+           {
+               cnt++;
+           }
+            cout<<cnt<<endl;
+        }
+
      }
              
 }
