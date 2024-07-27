@@ -29,18 +29,32 @@ int32_t main()
      faster();
      testCase
      {
-        int n;
-        cin>>n;
-        vi v(n);
-        for(auto &i:v)
-        {
-          cin>>i;
-        }
-
-        for(auto i:v)
-        {
-          cout<<i<<" ";
-        }cout<<endl;
+          int n;
+          cin>>n;
+          vi v(n+1,0);
+          for(int i=0;i<n;i++)
+          {
+               int x;
+               cin>>x;
+               v[x]++;
+          }
+          bool ok=false;
+          for(int i=1;i<=n;i++)
+          {
+               if(v[i]%2==1)
+               {
+                    ok=true;
+                    break;
+               }
+          }
+          if(ok)
+               {
+                    yes;
+               }
+               else
+               {
+                    no;
+               }
      }
              
 }
