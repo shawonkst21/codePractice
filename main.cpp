@@ -29,15 +29,18 @@ int32_t main()
      faster();
      testCase
      {
-        int n;
-        cin>>n;
-        int sum=0;
-        while(n)
-        {
-          sum+=n%10;
-          n/=10;
-        }
-        cout<<sum<<endl;
+        int a1,a2,b1,b2;
+        cin>>a1>>a2>>b1>>b2;
+        int cnt=0;
+         if(a1>=b1 && a2>b2 || a1>b1 && a2>=b2)
+         {
+           cnt++;
+         }
+         if(a1>=b2 && a2>b1 || a1>b2 && a2>=b1)
+         {
+            cnt++;
+         }
+         cout<<cnt*2<<endl;
      }
              
 }
