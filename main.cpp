@@ -29,24 +29,15 @@ int32_t main()
      faster();
      testCase
      {
-          int n,k;
-          cin>>n>>k;
-          char a[n+10][n+10];
-          for(int i=1;i<=n;i++)
-          {
-               for(int j=1;j<=n;j++)
-               {
-                    cin>>a[i][j];
-               }
-          }
-
-          for(int i=1;i<=n;i+=k)
-          {
-               for(int j=1;j<=n;j+=k)
-               {
-                   cout<<a[i][j];
-               }cout<<endl;
-          }
+        int n;
+        cin>>n;
+        int sum=0;
+        while(n)
+        {
+          sum+=n%10;
+          n/=10;
+        }
+        cout<<sum<<endl;
      }
              
 }
