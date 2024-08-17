@@ -29,18 +29,19 @@ int32_t main()
      faster();
      testCase
      {
-        int a1,a2,b1,b2;
-        cin>>a1>>a2>>b1>>b2;
-        int cnt=0;
-         if(a1>=b1 && a2>b2 || a1>b1 && a2>=b2)
-         {
-           cnt++;
-         }
-         if(a1>=b2 && a2>b1 || a1>b2 && a2>=b1)
-         {
-            cnt++;
-         }
-         cout<<cnt*2<<endl;
+        int l,r,L,R;
+        cin>>l>>r>>L>>R;
+        int x=min(r,R)-max(l,L)+1;
+        int ans=x-1;
+        if(x<=0)
+        {
+          ans=1;
+        }else
+        {
+            ans+=(l!=L);
+            ans+=(r!=R);
+        }
+          cout<<ans<<endl;
      }
              
 }
