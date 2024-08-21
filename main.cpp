@@ -32,38 +32,33 @@ int32_t main()
         int n;
         cin>>n;
         vi v(n);
+        int sum=0;
         for(auto &i:v)
         {
-          cin>>i;
+           cin>>i;
+           sum+=i;
         }
-        
-        vi even,od;
-        for(int i=0;i<n;i++)
+
+        bool ok =false;
+        for(int i=0;i<n-1;i++)
         {
-           if(v[i]%2==1)
-           {
-               od.pb(i+1);
-           }
-           else
-           {
-               even.pb(i+1);
-           }
+            if(v[i]<0)
+            {
+                ok=true;
+                if(v[i+1]<0)
+                {
+                    sum+=4;
+                    break;
+                }
+
+            }
         }
-        if(od.size()>=3)
+        if(!ok && v[n-1]>0)
         {
-           yes;
-           cout<<od[0]<<' '<<od[1]<<' '<<od[2]<<endl;
+            sum+=(-4);
         }
-        else if(even.size()>=2 && od.size()!=0)
-        {
-          yes;
-          cout<<even[0]<<' '<<even[1]<<' '<<od[0]<<endl;
-        }
-        else
-        {
-          no;
-        }
-        
+        cout<<sum<<endl;
+
      }
              
 }
