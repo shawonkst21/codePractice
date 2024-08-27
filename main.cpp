@@ -14,7 +14,8 @@ int dy[]={-1,1,0,0};
 #define vp vector<pair<int,int>>
 #define  mii map<int,int>
 //priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
-
+ vi dis;
+ vi par;
 void faster()
 {
      ios_base::sync_with_stdio(false);
@@ -24,26 +25,22 @@ void faster()
     int t;       \
     cin >> t;    \
     while (t--)
+ 
 int32_t main()
 {
      faster();
      testCase
      {
-         int n;
-         cin>>n;
-         map<int,int>m;
-         for(int i=0;i<n;i++)
-         {
-            int x;
-            cin>>x;
-            m[x]++;
-         }
-         int mx=LLONG_MIN;
-         for(auto i:m)
-         {
-            mx=max(mx,i.second);
-         }
-         cout<<n-mx<<endl;
+          int n;
+          cin>>n;
+          vi v(n);
+          for(auto &i:v)
+          {
+               cin>>i;
+          }
+          sort(v.begin(),v.end());
+          cout<<v[n/2]<<endl;
      }
-             
+ 
+ 
 }
