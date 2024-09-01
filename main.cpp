@@ -24,23 +24,34 @@ void faster()
 #define testCase \
     int t;       \
     cin >> t;    \
-    while (t--)
- 
+    while(t--)
+
 int32_t main()
 {
      faster();
      testCase
      {
-          int n;
-          cin>>n;
-          vi v(n);
-          for(auto &i:v)
+          int a,b;
+          cin>>a>>b;
+          if(a==0 && b%2==0)
           {
-               cin>>i;
+               yes;
           }
-          sort(v.begin(),v.end());
-          cout<<v[n/2]<<endl;
-     }
- 
- 
+          else if(a%2==0 && b==0)
+          {
+               yes;
+          }
+          else
+          {
+             if(((b*2)+a)%2==0 && a!=0 && b!=0)
+             {
+               yes;
+             }
+             else
+             {
+               no;
+             }
+
+          }
+     } 
 }
