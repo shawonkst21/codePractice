@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-#define yes cout<<"YES"<<endl
-#define no cout<<"NO"<<endl
+#define yes cout<<"Yes"<<endl
+#define no cout<<"No"<<endl
 #define endl "\n"
 #define pb push_back  
 const int N=1e5+10;
@@ -31,27 +31,70 @@ int32_t main()
      faster();
      testCase
      {
-          int a,b;
-          cin>>a>>b;
-          if(a==0 && b%2==0)
+          int n;
+          cin>>n;
+          string str;
+          cin>>str;
+          int x=sqrt(n);
+          if(x*x!=n)
           {
-               yes;
-          }
-          else if(a%2==0 && b==0)
-          {
-               yes;
+               no;
           }
           else
           {
-             if(((b*2)+a)%2==0 && a!=0 && b!=0)
-             {
-               yes;
-             }
-             else
-             {
-               no;
-             }
-
+               bool ok1=true;
+               bool ok0=true;
+               for(int i=1;i<=x;i++)
+               {
+                    for(int j=1;j<=x;j++)
+                    {
+                         if(i==1 || i==x)
+                         {
+                              int temp=(i-1)*x+j;
+                              temp--;
+                              if(str[temp]!='1')
+                              {
+                                  ok1=false;
+                                  break;
+                              }
+                         }
+                         else if(i>1 && i<x)
+                         {
+                              if(j==1 || j==x)
+                              {
+                                   int temp=(i-1)*x+j;
+                                   temp--;
+                                   if(str[temp]!='1')
+                                 {
+                                      ok1=false;
+                                      break;
+                                 }
+                              }
+                              else
+                              {
+                                   int temp=(i-1)*x+j;
+                                   temp--;
+                                   if(str[temp]!='0')
+                                   {
+                                       ok0=false;
+                                       break;
+                                   }
+                              }
+                         }
+                    }
+                    if(ok1==false || ok0==false)
+                    {
+                         break;
+                    }
+               }
+               if(ok1==true && ok0==true)
+               {
+                    yes;
+               }
+               else
+               {
+                    no;
+               }
           }
      } 
 }
