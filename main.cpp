@@ -31,9 +31,27 @@ int32_t main()
      faster();
      testCase
      {
-         int a,b;
-         cin>>a>>b;
-         int mx=max(a,b);
-         cout<<(mx-a)+(b-mx)<<endl;
-     } 
+         int n;
+         cin>>n;
+         vector<string>str;
+         for(int i=0;i<n;i++)
+         {
+             string s;
+             cin>>s;
+             str.pb(s);
+         }
+          
+         for(int i=n-1;i>=0;i--)
+         {
+            string temp=str[i];
+            for(int j=0;j<4;j++)
+            {
+               if(temp[j]=='#')
+               {
+                    cout<<j+1<<" ";
+                    break;
+               }
+            }
+         }cout<<endl;
+    }
 }
