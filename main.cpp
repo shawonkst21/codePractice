@@ -31,34 +31,38 @@ int32_t main()
      faster();
      testCase
      {
-        int n;
-        cin>>n;
-        vi v(n);
-        for(auto &i:v)
+        int n,k;
+        cin>>n>>k;
+        vector<int>v(k);
+        int sum=0;
+        for(int i=0;i<k;i++)
         {
-          cin>>i;
+           int x,y;
+           cin>>x>>y;
+
+           v[--x]+=y;
         }
-        bool ok=true;
-        for(int i=0;i<n-1;i++)
+        int l=v.size();
+        sort(v.begin(),v.end());
+        if(n>=l)
         {
-            int x=abs(v[i]-v[i+1]);
-            if(x==5 || x==7)
-            {
-               continue;
-            }
-            else
-            {
-               ok=false;
-               break;
-            }
-        }
-        if(ok)
-        {
-            yes;
+           for(auto i:v)
+           {
+               sum+=i;
+           }
+           cout<<sum<<endl;
         }
         else
         {
-          no;
+          while(n--)
+          {
+            sum+=v.back();
+            v.pop_back();
+          }
+          cout<<sum<<endl;
         }
+
+
+
     }
 }
