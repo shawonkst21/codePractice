@@ -31,19 +31,34 @@ int32_t main()
      faster();
      testCase
      {
-        int x,y,k;
-        cin>>x>>y>>k;
-        if(x>y)
+        int n;
+        cin>>n;
+        vi v(n);
+        for(auto &i:v)
         {
-          int mx=(x+k-1)/k;
-          int my=max((y+k-1)/k,mx-1);
-          cout<<mx+my<<endl;
+          cin>>i;
+        }
+        bool ok=true;
+        for(int i=0;i<n-1;i++)
+        {
+            int x=abs(v[i]-v[i+1]);
+            if(x==5 || x==7)
+            {
+               continue;
+            }
+            else
+            {
+               ok=false;
+               break;
+            }
+        }
+        if(ok)
+        {
+            yes;
         }
         else
         {
-           int my=(y+k-1)/k;
-           int mx=max((x+k-1)/k,my);
-           cout<<my+mx<<endl;
+          no;
         }
     }
 }

@@ -29,7 +29,7 @@ int32_t main()
      faster();
      testCase
      {
-     
+          
      }
              
 }
