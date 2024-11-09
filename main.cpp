@@ -31,38 +31,8 @@ int32_t main()
      faster();
      testCase
      {
-        int n,k;
-        cin>>n>>k;
-        vector<int>v(k);
-        int sum=0;
-        for(int i=0;i<k;i++)
-        {
-           int x,y;
-           cin>>x>>y;
-
-           v[--x]+=y;
-        }
-        int l=v.size();
-        sort(v.begin(),v.end());
-        if(n>=l)
-        {
-           for(auto i:v)
-           {
-               sum+=i;
-           }
-           cout<<sum<<endl;
-        }
-        else
-        {
-          while(n--)
-          {
-            sum+=v.back();
-            v.pop_back();
-          }
-          cout<<sum<<endl;
-        }
-
-
-
+        int n;
+        cin>>n;
+        cout<<(n%2==0?"Sakurako":"Kosuke")<<endl;
     }
 }
