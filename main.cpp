@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-#define yes cout<<"Yes"<<endl
-#define no cout<<"No"<<endl
+#define yes cout<<"YES"<<endl
+#define no cout<<"NO"<<endl
 #define endl "\n"
 #define pb push_back  
 const int N=1e5+10;
@@ -14,8 +14,7 @@ int dy[]={-1,1,0,0};
 #define vp vector<pair<int,int>>
 #define  mii map<int,int>
 //priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
- vi dis;
- vi par;
+
 void faster()
 {
      ios_base::sync_with_stdio(false);
@@ -24,15 +23,24 @@ void faster()
 #define testCase \
     int t;       \
     cin >> t;    \
-    while(t--)
-
+    while (t--)
 int32_t main()
 {
      faster();
+     int cnt=0;
      testCase
      {
-        int n;
-        cin>>n;
-        cout<<(n%2==0?"Sakurako":"Kosuke")<<endl;
-    }
+
+          int a,b,c;
+          cin>>a>>b>>c;
+          int temp=a+b+c;
+          //cout<<temp<<endl;
+          if(temp>1)
+          {
+               cnt++;
+          }
+          
+     }
+     cout<<cnt<<endl;
+             
 }
