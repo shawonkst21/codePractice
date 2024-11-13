@@ -28,16 +28,29 @@ int32_t main()
 {
      faster();
      int cnt=0;
-     testCase
+     string str;
+     cin>>str;
+     vector<char>s;
+     for(auto i:str)
      {
-        int n;
-        cin>>n;
-        int x,y;
-        cin>>x>>y;
-        int mi=min(x,y);
-        int ans=n/mi;
-        cout<<((n%mi)?(++ans):ans)<<endl;
+          if(i=='+')
+          {
+               continue;
+          }
+          else{
+               s.push_back(i);
+          }
      }
+     sort(s.begin(),s.end());
+     int l=0;
+     for(auto i:s)
+     {
+         cout<<i;
+         if(l<s.size()-1){
+          cout<<"+";
+         }
+         l++;
+     }cout<<endl;
 
              
 }
