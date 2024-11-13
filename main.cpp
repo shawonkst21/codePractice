@@ -30,17 +30,44 @@ int32_t main()
      int cnt=0;
      testCase
      {
-
-          int a,b,c;
-          cin>>a>>b>>c;
-          int temp=a+b+c;
-          //cout<<temp<<endl;
-          if(temp>1)
+        int n,r;
+        cin>>n>>r;
+        vi v(n);
+        for(auto &i:v)
+        {
+          cin>>i;
+        }
+        int cnt=0;
+        int ans=0;
+        for(auto i:v)
+        {
+          if(i%2==0)
           {
+             ans+=(i/2)*2;
+             r-=i/2;
+          }
+          else{
+               if(i/2)
+               {
+                    ans+=(i/2)*2;
+                    r-=i/2;
+               }
                cnt++;
           }
-          
+        }
+          if(r>=cnt)
+          {
+               ans+=cnt;
+          }
+          else
+          {
+               if(cnt%r)
+               {
+                    ans+=(r-(cnt%r));
+               }
+          }
+          cout<<ans<<endl;
      }
-     cout<<cnt<<endl;
+
              
 }
