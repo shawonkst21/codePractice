@@ -27,17 +27,10 @@ void faster()
 int32_t main()
 {
      faster();
-     int n;
-     cin>>n;
-     int cnt=0;
-     while(n--)
-     {
-          int p,q;
-          cin>>p>>q;
-          if(abs(p-q)>=2){
-               cnt++;
-          }
+     testCase{
+          int a,b;
+          cin>>a>>b;
+          cout<<a+b<<endl;
      }
-      cout<<cnt<<endl;
              
 }
