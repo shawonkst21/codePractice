@@ -27,31 +27,17 @@ void faster()
 int32_t main()
 {
      faster();
-     string s1,s2;
-     cin>>s1>>s2;
-     transform(s1.begin(),s1.end(),s1.begin(),::toupper);
-       transform(s2.begin(),s2.end(),s2.begin(),::toupper);
-       if(s1==s2)
-       {
-          cout<<"0"<<endl;
-       }
-       else{
-          for(int i=0;i<s1.size();i++)
-          {
-               if(s1[i]==s2[i]){
-                    continue;
-               }
-               else if(s1[i]<s2[i]){
-                    cout<<"-1"<<endl;
-                    break;
-               }
-               else{
-                    cout<<"1"<<endl;
-                    break;
-               }
+     int n;
+     cin>>n;
+     int cnt=0;
+     while(n--)
+     {
+          int p,q;
+          cin>>p>>q;
+          if(abs(p-q)>=2){
+               cnt++;
           }
-       }
-
-
+     }
+      cout<<cnt<<endl;
              
 }
