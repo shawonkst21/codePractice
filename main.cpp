@@ -28,15 +28,27 @@ int32_t main()
 {
      faster();
      testCase{
-         int n;
-         cin>>n;
-         int k=1;
-         while(n>3)
-         {
-           k*=2;
-           n/=4;
-         }
-         cout<<k<<endl;
+        int n;
+        cin>>n;
+        vi v1(n);
+        vi v2(n);
+        for(auto &i:v1)
+        {
+          cin>>i;
+        }
+        for(auto &i:v2)
+        {
+           cin>>i;
+        }
+        int sum=v1[n-1];
+        for(int i=0;i<n-1;i++)
+        {
+            if(v1[i]>v2[i+1])
+            {
+               sum+=(v1[i]-v2[i+1]);
+            }
+        }
+        cout<<sum<<endl;
 
      }
      
