@@ -28,27 +28,15 @@ int32_t main()
 {
      faster();
      testCase{
-        int n;
-        cin>>n;
-        vi v1(n);
-        vi v2(n);
-        for(auto &i:v1)
-        {
-          cin>>i;
-        }
-        for(auto &i:v2)
-        {
-           cin>>i;
-        }
-        int sum=v1[n-1];
-        for(int i=0;i<n-1;i++)
-        {
-            if(v1[i]>v2[i+1])
-            {
-               sum+=(v1[i]-v2[i+1]);
-            }
-        }
-        cout<<sum<<endl;
+     char s[10];
+     cin>>s;
+     if(!strcmpi(s,"yes"))
+     {
+          yes;
+     }
+     else{
+          no;
+     }
 
      }
      
