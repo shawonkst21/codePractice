@@ -27,17 +27,68 @@ void faster()
 int32_t main()
 {
      faster();
-     testCase{
-     char s[10];
-     cin>>s;
-     if(!strcmpi(s,"yes"))
+     testCase
      {
+       int n,m;
+       cin>>n>>m;
+       string s1,s2;
+       cin>>s1>>s2;
+       bool first=true,second=true;
+       if(n==1 && m==1 && (s1!=s2))
+       {
           yes;
-     }
-     else{
-          no;
-     }
+       }
+       else{
+          for(int i=0;i<m-1;i++)
+          {
+               if(s2[i]==s2[i+1])
+               {
+                    second=false;
+                    break;
+               }
+          }
+          for(int i=0;i<n-1;i++)
+          {
+               if(s1[i]==s1[i+1])
+               {
+                    first=false;
+                    break;
+               }
+          }
+          if(first==true)
+          {
+               yes;
+          }
+          else if(first==false && second==false)
+          {
+               no;
+          }
+          else{
+               bool ans=true;
+               for(int i=0;i<n-1;i++)
+               {
+                    if(s1[i]==s1[i+1])
+                    {
+                         if(s1[i]!=s2[0] && s1[i+1]!=s2[m-1])
+                         {
+                              continue;
+                         }
+                         else{
+                              ans=false;
+                              break;
+                         }
+                    }
+               }
+               if(ans)
+               {
+                    yes;
+               }
+               else{
+                    no;
+               }
+          }
 
+       }
      }
      
 }
