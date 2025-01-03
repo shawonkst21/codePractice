@@ -84,6 +84,7 @@ int32_t main()
            else{
                i++;
                j--;
+               d++;
            }
         }
         cout<<ans.size()<<endl;
