@@ -34,8 +34,10 @@ int32_t main()
        string s;
        cin>>s;
        int cnt1=0,cnt0=0;
+       deque<int>q;
        for(auto i:s)
        {
+          q.push_back(i);
           if(i=='0')
           {
                cnt0++;
@@ -49,44 +51,32 @@ int32_t main()
           cout<<"-1"<<endl;
        }
        else{
-       int i=0;
-       int j=n-1;
        vector<int>ans;
-       bool f=false;
        int d=0;
-        while(i<j)
-        {
-           if(s[i]==s[j] && s[i]=='0')
-           {
-               s+="0";
-               ans.push_back(j+1);
-               i++;
-               j++;
-           }
-           else if(s[i]==s[j] && s[i]=='1'){
-               if(i==0 && f==false)
+     while(!q.empty())
+     {
+          if(q.front()==q.back())
+          {
+               if(q.front()=='0')
                {
-                   ans.push_back(0);
-                   s="1"+s;
-                   j--;
-                   i=0;
-                   d++;
-                   f=true;
+                    q.push_back('0');
+                    q.push_back('1');
+                    ans.push_back(n-d);
                }
                else{
-                    ans.push_back(d);
-                    d++;
-                    j--;
-                    i=0;
+                    q.push_front('1');
+                    q.push_front('0');
+                    ans.push_back(0+d);
                }
-
-           }
-           else{
-               i++;
-               j--;
-               d++;
-           }
-        }
+               n+=2;
+          }
+          while(!q.empty() && q.front()!=q.back())
+          {
+                q.pop_back();
+                q.pop_front();
+                ++d;
+          }
+     }
         cout<<ans.size()<<endl;
         for(auto i:ans)
         {
