@@ -29,63 +29,28 @@ int32_t main()
      faster();
      testCase
      {
-       int n;
-       cin>>n;
-       string s;
-       cin>>s;
-       int cnt1=0,cnt0=0;
-       deque<int>q;
-       for(auto i:s)
-       {
-          q.push_back(i);
-          if(i=='0')
+          int n,k;
+          cin>>n>>k;
+          vector<int>p(n+10,-1);
+          int d=1;
+          for(int i=k;i<=n;i+=k)
           {
-               cnt0++;
+                p[i]=d;
+                d++;
           }
-          else{
-               cnt1++;
-          }
-       }
-       if(cnt1!=cnt0)
-       {
-          cout<<"-1"<<endl;
-       }
-       else{
-       vector<int>ans;
-       int d=0;
-     while(!q.empty())
-     {
-          if(q.front()==q.back())
+          for(int i=1;i<=n;i++)
           {
-               if(q.front()=='0')
+               if(p[i]==-1)
                {
-                    q.push_back('0');
-                    q.push_back('1');
-                    ans.push_back(n-d);
+                    p[i]=d;
+                    d++;
                }
-               else{
-                    q.push_front('1');
-                    q.push_front('0');
-                    ans.push_back(0+d);
-               }
-               n+=2;
           }
-          while(!q.empty() && q.front()!=q.back())
+          for(int i=1;i<=n;i++)
           {
-                q.pop_back();
-                q.pop_front();
-                ++d;
-          }
+               cout<<p[i]<<" ";
+          }cout<<endl;
      }
-        cout<<ans.size()<<endl;
-        for(auto i:ans)
-        {
-          cout<<i<<" ";
-        }cout<<endl;
-
-     }
-     
-}
 }
 
 
