@@ -1,26 +1,34 @@
 class Solution {
 public:
-    int maxScore(string s) {
-        int cnt0=0,cnt1=0;
-        for(auto i:s)
+    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& q) {
+        int n=words.size();
+        vector<int>temp(n,0);
+        for(int i=0;i<n;i++)
         {
-            if(i=='1')
+            string s=words[i];
+            if(s[0]=='a' || s[0]=='e'|| s[0]=='i' || s[0]=='o' || s[0]=='u')
             {
-                cnt1++;
-            }
+                int d=s.size()-1;
+                if(s[d]=='a' || s[d]=='e' || s[d]=='i' || s[d]=='o' || s[d]=='u')
+                {
+                    temp[i]=1;
+                }
+            
         }
-        int mx=INT_MIN;
-        for(int i=0;i<s.size()-1;i++)
+        vector<int>pre(n);
+        pre[0]=temp[0];
+        for(int i=1;i<n;i++)
         {
-              if(s[i]=='0')
-              {
-                cnt0++;
-              }
-              else{
-                cnt1--;
-              }
-              mx=max(mx,cnt1+cnt0);
+            pre[i]=temp[i]+pre[i-1];
         }
-        return mx;
+        vector<int>ans;
+        for(int i=0;i<q.size();i++)
+        {
+             int l=q[i][0];
+             int r=q[i][1];
+             ans.push_back((l==0?pre[r]:(pre[r]-pre[l-1])));
+        }
+        return ans;
     }
 };
+//day2

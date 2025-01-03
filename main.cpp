@@ -29,69 +29,74 @@ int32_t main()
      faster();
      testCase
      {
-       int n,m;
-       cin>>n>>m;
-       string s1,s2;
-       cin>>s1>>s2;
-       bool first=true,second=true;
-       if(n==1 && m==1 && (s1!=s2))
+       int n;
+       cin>>n;
+       string s;
+       cin>>s;
+       int cnt1=0,cnt0=0;
+       for(auto i:s)
        {
-          yes;
-       }
-       else{
-          for(int i=0;i<m-1;i++)
+          if(i=='0')
           {
-               if(s2[i]==s2[i+1])
-               {
-                    second=false;
-                    break;
-               }
-          }
-          for(int i=0;i<n-1;i++)
-          {
-               if(s1[i]==s1[i+1])
-               {
-                    first=false;
-                    break;
-               }
-          }
-          if(first==true)
-          {
-               yes;
-          }
-          else if(first==false && second==false)
-          {
-               no;
+               cnt0++;
           }
           else{
-               bool ans=true;
-               for(int i=0;i<n-1;i++)
+               cnt1++;
+          }
+       }
+       if(cnt1!=cnt0)
+       {
+          cout<<"-1"<<endl;
+       }
+       else{
+       int i=0;
+       int j=n-1;
+       vector<int>ans;
+       bool f=false;
+       int d=0;
+        while(i<j)
+        {
+           if(s[i]==s[j] && s[i]=='0')
+           {
+               s+="0";
+               ans.push_back(j+1);
+               i++;
+               j++;
+           }
+           else if(s[i]==s[j] && s[i]=='1'){
+               if(i==0 && f==false)
                {
-                    if(s1[i]==s1[i+1])
-                    {
-                         if(s1[i]!=s2[0] && s1[i+1]!=s2[m-1])
-                         {
-                              continue;
-                         }
-                         else{
-                              ans=false;
-                              break;
-                         }
-                    }
-               }
-               if(ans)
-               {
-                    yes;
+                   ans.push_back(0);
+                   s="1"+s;
+                   j--;
+                   i=0;
+                   d++;
+                   f=true;
                }
                else{
-                    no;
+                    ans.push_back(d);
+                    d++;
+                    j--;
+                    i=0;
                }
-          }
 
-       }
+           }
+           else{
+               i++;
+               j--;
+           }
+        }
+        cout<<ans.size()<<endl;
+        for(auto i:ans)
+        {
+          cout<<i<<" ";
+        }cout<<endl;
+
      }
      
 }
+}
+
 
 
              
