@@ -29,27 +29,24 @@ int32_t main()
      faster();
      testCase
      {
-          int n,k;
-          cin>>n>>k;
-          vector<int>p(n+10,-1);
-          int d=1;
-          for(int i=k;i<=n;i+=k)
-          {
-                p[i]=d;
-                d++;
-          }
-          for(int i=1;i<=n;i++)
-          {
-               if(p[i]==-1)
-               {
-                    p[i]=d;
-                    d++;
-               }
-          }
-          for(int i=1;i<=n;i++)
-          {
-               cout<<p[i]<<" ";
-          }cout<<endl;
+         int n;
+         cin>>n;
+         int a[n*2]={0};
+         for(int i=0;i<n;i++)
+         {
+           for(int j=0;j<n;j++)
+           {
+               int x;
+               cin>>x;
+               a[n+i-j]=min(a[n+i-j],x);
+           }
+         }
+         int ans=0;
+         for(int i=0;i<2*n;i++)
+         {
+            if(a[i]<0)ans+=(-a[i]);
+         }
+         cout<<ans<<endl;
      }
 }
 
