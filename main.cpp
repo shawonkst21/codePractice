@@ -29,9 +29,16 @@ int32_t main()
      faster();
      testCase
      {
-         int n,m;
-         cin>>n>>m;
-         cout<<(max(n,m)+1)<<endl;
+        int n;
+        cin>>n;
+        for(int cur=1,ans=1;;ans++,cur=cur*2+2)
+        {
+          if(cur>=n)
+          {
+               cout<<ans<<endl;
+               break;
+          }
+        }
      }
 }
 
