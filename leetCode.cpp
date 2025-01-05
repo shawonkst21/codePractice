@@ -1,34 +1,41 @@
 class Solution {
 public:
-    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& q) {
-        int n=words.size();
-        vector<int>temp(n,0);
-        for(int i=0;i<n;i++)
+    string shiftingLetters(string s, vector<vector<int>>& shifts) {
+        int n=s.size();
+        vector<int>pre(n,0);
+        for(auto q:shifts)
         {
-            string s=words[i];
-            if(s[0]=='a' || s[0]=='e'|| s[0]=='i' || s[0]=='o' || s[0]=='u')
+            int l=q[0];
+            int r=q[1];
+            int shift=q[2];
+            int x;
+            if(shift==0)
             {
-                int d=s.size()-1;
-                if(s[d]=='a' || s[d]=='e' || s[d]=='i' || s[d]=='o' || s[d]=='u')
-                {
-                    temp[i]=1;
-                }
-            
+                x=-1;
+            }
+            else if(shift==1)
+            {
+                x=1;
+            }
+            pre[l]+=x;
+            if(r+1<n)
+            {
+                pre[r+1]-=x;
+            }
         }
-        vector<int>pre(n);
-        pre[0]=temp[0];
         for(int i=1;i<n;i++)
         {
-            pre[i]=temp[i]+pre[i-1];
+            pre[i]+=pre[i-1];
         }
-        vector<int>ans;
-        for(int i=0;i<q.size();i++)
+        for(int i=0;i<n;i++)
         {
-             int l=q[i][0];
-             int r=q[i][1];
-             ans.push_back((l==0?pre[r]:(pre[r]-pre[l-1])));
+            int shift=pre[i]%26;
+            if(shift<0)
+            {
+                shift+=26;
+            }
+            s[i]=((s[i]-'a')+shift)%26+'a';
         }
-        return ans;
+        return s;
     }
 };
-//day2
