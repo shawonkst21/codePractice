@@ -29,9 +29,38 @@ int32_t main()
      faster();
      testCase
      {
-        int n,m;
-        cin>>n>>m;
-        cout<<(max(n,m))+1<<endl;
+        int n,k;
+        cin>>n>>k;
+        vector<int>v(n);
+        for(auto &i:v)
+        {
+          cin>>i;
+        }
+        map<int,int>m;
+        for(auto i:v)
+        {
+          m[i]++;
+        }
+         vector<int>fre;
+
+        for(auto i:m)
+        {
+          fre.pb(i.second);
+        }
+        sort(fre.begin(),fre.end());
+        int p=0;
+        while(k>0 && p<fre.size()-1)
+        {
+            if(k>=fre[p])
+            {
+               k-=fre[p];
+               p++;
+            }
+            else{
+               break;
+            }
+        }
+        cout<<fre.size()-p<<endl;
      }
 }
 
