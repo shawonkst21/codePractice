@@ -1,50 +1,73 @@
 class Solution {
 public:
-    vector<int> minOperations(string boxes) {
-        int n=boxes.size();
-        vector<int>box(n,0);
-       for(int i=0;i<n;i++)
-       {
-            if(boxes[i]=='1')
-            {
-                box[i]=1;
-            }
-       }
-       vector<int>temp=box;
-      for(int i=1;i<n;i++)
-      {
-        box[i]+=box[i-1];
-      }
-      for(int i=n-2;i>=0;i--)
-      {
-        temp[i]+=temp[i+1];
-      }
-      vector<int>pre(n+10,0),suf(n+10,0);
-      pre[0]=box[0];
-      for(int i=1;i<n;i++)
-      {
-        pre[i]=pre[i-1]+box[i];
-      }
-      suf[n-1]=temp[n-1];
-      for(int i=n-2;i>=0;i--)
-      {
-        suf[i]=temp[i]+suf[i+1];
-      }
-      vector<int>ans(n,0);
-      for(int i=0;i<n;i++)
-      {
-          if(i==0)
+vector<int>createlps(string patt)
+{
+     vector<int>lps(patt.size());
+     int ldx=0;
+     for(int i=1;i<patt.size();)
+     {
+          if(patt[ldx]==patt[i])
           {
-              ans[i]=suf[i+1];
-          }
-          else if(i==n-1)
-          {
-            ans[i]=pre[i-1];
+               lps[i]=ldx+1;
+               ldx++;
+               i++;
           }
           else{
-            ans[i]=pre[i-1]+suf[i+1];
+               if(ldx!=0)
+               {
+                    ldx=lps[ldx-1];
+               }
+               else{
+                    lps[i]=ldx;
+                    i++;
+               }
           }
-      }
-      return ans;
+     }
+     return lps;
+}
+bool kmp(string text,string pattern)
+{
+     vector<int>lps=createlps(pattern);
+     int i=0,j=0;
+     vector<int>ans;
+     while(i<text.size())
+     {
+          if(text[i]==pattern[j]){
+               i++;
+               j++;
+          }
+          else{
+               if(j!=0)
+               {
+                    j=lps[j-1];
+               }
+               else{
+                    i++;
+               }
+          }
+          if(j==pattern.size())
+          {
+               return true;
+          }
+     }
+   return false;
+}
+    vector<string> stringMatching(vector<string>& words) {
+        int n=words.size();
+        vector<string>ans;
+
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(i==j)continue;
+                if(kmp(words[j],words[i]))
+                {
+                    ans.push_back(words[i]);
+                    break;
+                }
+            }
+        }
+        return ans;
     }
 };
