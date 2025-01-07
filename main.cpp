@@ -23,44 +23,35 @@ void faster()
     int t;       \
     cin >> t;    \
     while (t--)
+void solve(string str)
+{
+     int n=str.size();
+     for(int i=0;i+1<n;i++)
+     {
+          if(str[i]==str[i+1])
+          {
+               cout<<str.substr(i,2)<<endl;
+               return;
+          }
+     }
 
+     for(int i=0;i+2<n;i++){
+          if(str[i]!=str[i+1] && str[i]!=str[i+2] && str[i+1]!=str[i+2])
+          {
+               cout<<str.substr(i,3)<<endl;
+               return;
+          }
+     }
+     cout<<"-1"<<endl;
+}
 int32_t main()
 {
      faster();
      testCase
      {
-        int n,k;
-        cin>>n>>k;
-        vector<int>v(n);
-        for(auto &i:v)
-        {
-          cin>>i;
-        }
-        map<int,int>m;
-        for(auto i:v)
-        {
-          m[i]++;
-        }
-         vector<int>fre;
-
-        for(auto i:m)
-        {
-          fre.pb(i.second);
-        }
-        sort(fre.begin(),fre.end());
-        int p=0;
-        while(k>0 && p<fre.size()-1)
-        {
-            if(k>=fre[p])
-            {
-               k-=fre[p];
-               p++;
-            }
-            else{
-               break;
-            }
-        }
-        cout<<fre.size()-p<<endl;
+        string str;
+        cin>>str;
+        solve(str);
      }
 }
 
