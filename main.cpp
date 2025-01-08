@@ -23,35 +23,36 @@ void faster()
     int t;       \
     cin >> t;    \
     while (t--)
-void solve(string str)
-{
-     int n=str.size();
-     for(int i=0;i+1<n;i++)
-     {
-          if(str[i]==str[i+1])
-          {
-               cout<<str.substr(i,2)<<endl;
-               return;
-          }
-     }
 
-     for(int i=0;i+2<n;i++){
-          if(str[i]!=str[i+1] && str[i]!=str[i+2] && str[i+1]!=str[i+2])
-          {
-               cout<<str.substr(i,3)<<endl;
-               return;
-          }
-     }
-     cout<<"-1"<<endl;
-}
 int32_t main()
 {
      faster();
      testCase
      {
-        string str;
-        cin>>str;
-        solve(str);
+        int n;
+        cin>>n;
+        if(n<5)
+        {
+          cout<<"-1"<<endl;
+        }
+        else{
+          for(int i=1;i<=n;i+=2)
+          {
+               if(i!=5)
+               {
+                    cout<<i<<" ";
+               }
+
+          }
+          cout<<"5"<<' '<<"4"<<" ";
+          for(int i=2;i<=n;i+=2)
+          {
+               if(i!=4)
+               {
+                    cout<<i<<' ';
+               }
+          }cout<<endl;
+        }
      }
 }
 
