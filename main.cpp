@@ -31,28 +31,26 @@ int32_t main()
      {
         int n;
         cin>>n;
-        if(n<5)
+        string str;
+        cin>>str;
+        set<char>s1,s2;
+        vector<int>dis1(n,0),dis2(n,0);
+        for(int i=0;i<n;i++)
         {
-          cout<<"-1"<<endl;
+           s1.insert(str[i]);
+           dis1[i]=s1.size();
         }
-        else{
-          for(int i=1;i<=n;i+=2)
-          {
-               if(i!=5)
-               {
-                    cout<<i<<" ";
-               }
-
-          }
-          cout<<"5"<<' '<<"4"<<" ";
-          for(int i=2;i<=n;i+=2)
-          {
-               if(i!=4)
-               {
-                    cout<<i<<' ';
-               }
-          }cout<<endl;
+        for(int i=n-1;i>=0;i--)
+        {
+           s2.insert(str[i]);
+           dis2[i]=s2.size();
         }
+          int cnt=0;
+        for(int i=0;i<n-1;i++)
+        {
+                cnt=max(cnt,dis1[i]+dis2[i+1]);
+        }
+        cout<<cnt<<endl;
      }
 }
 
