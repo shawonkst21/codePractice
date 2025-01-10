@@ -23,33 +23,28 @@ void faster()
     int t;       \
     cin >> t;    \
     while (t--)
-bool solve(int n,int m)
-{
-      if(n==m)
-      {
-          return true;
-      }
-      else if(n%3!=0)
-      {
-          return false;
-      }
-      return ((solve(n/3,m))||(solve(2*n/3,m)));
-      //solve
-}
+
 int32_t main()
 {
      faster();
      testCase
      {
-        int n,m;
-        cin>>n>>m;
-        if(solve(n,m)==true)
+        int n;
+        cin>>n;
+        vi v(n);
+        for(auto &i:v)
         {
-           yes;
+          cin>>i;
         }
-        else{
-          no;
-        }
+        for(auto i:v)
+        {
+            if(i==n)
+            {
+               cout<<"1"<<' ';
+               continue;
+            }
+            cout<<i+1<<' ';
+        }cout<<endl;
      }
 }
 
