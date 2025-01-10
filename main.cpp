@@ -34,6 +34,7 @@ bool solve(int n,int m)
           return false;
       }
       return ((solve(n/3,m))||(solve(2*n/3,m)));
+      //solve
 }
 int32_t main()
 {
