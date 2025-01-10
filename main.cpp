@@ -27,36 +27,20 @@ void faster()
 int32_t main()
 {
      faster();
-
-        int s,n;
-        cin>>s>>n;
-        vector<pair<int,int>>v;
-        for(int i=0;i<n;i++)
+     testCase
+     {
+        int n;
+        cin>>n;
+        int s=1000;
+        cout<<s<<' ';
+        for(int i=2;i<=n;i++)
         {
-          int x,y;
-          cin>>x>>y;
-          v.push_back({x,y});
-        }
-        sort(begin(v),end(v));
-        bool ok=false;
-        for(auto i:v)
-        {
-           if(s>i.first)
-            {
-               s+=i.second;
-            }
-            else{
-               ok=true;
-            }
-        }
-        if(ok)
-        {
-          no;
-        }
-        else{
-          yes;
-        }
-     
+          int x;
+          cin>>x;
+          s+=x;
+          cout<<s<<' ';
+        }cout<<endl;
+     }
 }
 
 
