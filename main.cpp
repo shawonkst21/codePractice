@@ -29,28 +29,30 @@ int32_t main()
      faster();
      testCase
      {
-        int n;
-        cin>>n;
-        string str;
-        cin>>str;
-        set<char>s1,s2;
-        vector<int>dis1(n,0),dis2(n,0);
-        for(int i=0;i<n;i++)
-        {
-           s1.insert(str[i]);
-           dis1[i]=s1.size();
-        }
-        for(int i=n-1;i>=0;i--) 
-        {
-           s2.insert(str[i]);
-           dis2[i]=s2.size();
-        }
-          int cnt=0;
-        for(int i=0;i<n-1;i++)
-        {
-                cnt=max(cnt,dis1[i]+dis2[i+1]);
-        }
-        cout<<cnt<<endl;
+       int n;
+       cin>>n;
+       vector<int>a(n),b(n);
+       for(auto &i:a)
+       {
+          cin>>i;
+       }
+       for(auto &i:b)
+       {
+          cin>>i;
+       }
+       if(a==b)
+       {
+          cout<<"Bob"<<endl;
+          continue;
+       }
+       reverse(begin(b),end(b));
+       if(a==b)
+       {
+            cout<<"Bob"<<endl;
+            continue;
+       }
+       cout<<"Alice"<<endl;
+
      }
 }
 
