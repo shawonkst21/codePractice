@@ -1,17 +1,41 @@
 class Solution {
 public:
-    int prefixCount(vector<string>& words, string pref) {
-        int n=pref.size();
-        int cnt=0;
-        for(int i=0;i<words.size();i++)
+bool isSubset(vector<int>&frq,vector<int>&temp)
+{
+    for(int i=0;i<26;i++)
+    {
+        if(frq[i]>temp[i])
         {
-            string temp=words[i];
-            if(pref==temp.substr(0,n))
-            {
-                cnt++;
-            }
-
+            return false;
         }
-        return cnt;
+    }
+    return true;
+}
+    vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
+        vector<string>ans;
+        vector<int>frq(26,0);
+        for(auto &word:words2)
+        {
+            int temp[26]={0};
+            for(auto &ch:word)
+            {
+                temp[ch-'a']++;
+                frq[ch-'a']=max(temp[ch-'a'],frq[ch-'a']);
+            }
+        }
+
+        for(auto & str:words1 )
+        {
+            vector<int>temp(26,0);
+            for(auto&ch:str)
+            {
+                temp[ch-'a']++;
+            }
+            if(isSubset(frq,temp)==true)
+            {
+                ans.push_back(str);
+            }
+        }
+       return ans;
     }
 };

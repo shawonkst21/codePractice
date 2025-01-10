@@ -40,7 +40,7 @@ int32_t main()
            s1.insert(str[i]);
            dis1[i]=s1.size();
         }
-        for(int i=n-1;i>=0;i--)
+        for(int i=n-1;i>=0;i--) 
         {
            s2.insert(str[i]);
            dis2[i]=s2.size();
