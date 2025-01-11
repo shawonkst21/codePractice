@@ -29,33 +29,40 @@ int32_t main()
      faster();
      testCase
      {
-        int n,k,q;
-        cin>>n>>k>>q;
-        vi v(n);
+        int n,c,d;
+        cin>>n>>c>>d;
+        vi v(n*n);
         for(auto &i:v)
         {
           cin>>i;
         }
-        int ans=0,cons=0;
-        for(int i=0;i<n;i++)
+        sort(begin(v),end(v));
+        int x=v[0];
+        int y=x;
+        vi temp(n*n);
+        temp[0]=x;
+        for(int i=1;i<n*n;i++)
         {
-            if(v[i]<=q)
-            {
-               cons++;
-               if(i==n-1 || v[i+1]>q)
-               {
-                   if(cons>=k)
-                   {
-                     int x=cons-k+1;
-                    int sum=(x*(x+1))/2;
-                    ans+=sum;
-                   }
-                   cons=0;
+              if(i%n==0)
+              {
+                x+=c;
+                y=x;
+                temp[i]=y;
+              }
+              else{
+               y+=d;
+               temp[i]=y;
+              }
 
-               }
-            }
         }
-        cout<<ans<<endl;
+        sort(begin(temp),end(temp));
+        if(temp==v)
+        {
+          yes;
+        }
+        else{
+          no;
+        }
      }
 }
 
