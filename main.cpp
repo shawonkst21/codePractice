@@ -50,7 +50,7 @@ int32_t main()
                     int sum=(x*(x+1))/2;
                     ans+=sum;
                    }
-                                  cons=0;
+                   cons=0;
 
                }
             }

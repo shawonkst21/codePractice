@@ -1,41 +1,29 @@
 class Solution {
 public:
-bool isSubset(vector<int>&frq,vector<int>&temp)
-{
-    for(int i=0;i<26;i++)
-    {
-        if(frq[i]>temp[i])
+    bool canConstruct(string s, int k) {
+        int n=s.size();
+        if(n==k)
         {
-            return false;
+            return true;
         }
-    }
-    return true;
-}
-    vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
-        vector<string>ans;
-        vector<int>frq(26,0);
-        for(auto &word:words2)
+        else if(n<k)
         {
-            int temp[26]={0};
-            for(auto &ch:word)
-            {
-                temp[ch-'a']++;
-                frq[ch-'a']=max(temp[ch-'a'],frq[ch-'a']);
-            }
+             return false;
         }
-
-        for(auto & str:words1 )
+        map<char,int>m;
+        for(auto i:s)
         {
-            vector<int>temp(26,0);
-            for(auto&ch:str)
-            {
-                temp[ch-'a']++;
-            }
-            if(isSubset(frq,temp)==true)
-            {
-                ans.push_back(str);
-            }
+            m[i]++;
         }
-       return ans;
+        int cnt=0;
+         for(auto i:m)
+         {
+            if(i.second%2==1)
+            {
+                cnt++;
+            }
+         }
+         if(cnt>k)return false;
+         return true;
     }
 };
