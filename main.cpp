@@ -31,31 +31,30 @@ int32_t main()
      {
         int n;
         cin>>n;
-        bool ok=false;
-        if(n%2==1)
+        vi v(n);
+        for(auto &i:v)
         {
-          n--;
-          ok=true;
+            cin>>i;
         }
-        vector<int>v;
-        for(int i=0;i<n;i++)
-        {
-              if(i%2==0)
-              {
-                 v.push_back(n-i);
-              }
-              else{
-               v.push_back(i);
-              }
-        }
-        if(ok==true)
-        {
-          v.push_back(n+1);
-        }
+        vi rem(3,0);
         for(auto i:v)
         {
-          cout<<i<<" ";
-        }cout<<endl;
+            rem[i%3]++;
+        }
+        int res=0;
+        while(*min_element(rem.begin(),rem.end())!=n/3)
+        {
+          for(int i=0;i<3;i++)
+          {
+               if(rem[i]>n/3)
+               {
+                    res++;
+                    rem[i]--;
+                    rem[(i+1)%3]++;
+               }
+          }
+        }
+        cout<<res<<endl;
      }
 }
 
