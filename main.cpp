@@ -27,34 +27,23 @@ void faster()
 int32_t main()
 {
      faster();
-     testCase
+     int n;
+     cin>>n;
+     vi v(2*n);
+     for(auto &i:v)
      {
-        int n;
-        cin>>n;
-        vi v(n);
-        for(auto &i:v)
-        {
-            cin>>i;
-        }
-        vi rem(3,0);
-        for(auto i:v)
-        {
-            rem[i%3]++;
-        }
-        int res=0;
-        while(*min_element(rem.begin(),rem.end())!=n/3)
-        {
-          for(int i=0;i<3;i++)
+          cin>>i;
+     }
+     sort(begin(v),end(v));
+     if(v[0]==v[2*n-1])
+     {
+          cout<<"-1"<<endl;
+     }
+     else{
+          for(auto i:v)
           {
-               if(rem[i]>n/3)
-               {
-                    res++;
-                    rem[i]--;
-                    rem[(i+1)%3]++;
-               }
+               cout<<i<<" ";
           }
-        }
-        cout<<res<<endl;
      }
 }
 
