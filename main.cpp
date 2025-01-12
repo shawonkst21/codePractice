@@ -29,21 +29,32 @@ int32_t main()
      faster();
      int n;
      cin>>n;
-     vi v(2*n);
+     vi v(n);
      for(auto &i:v)
      {
           cin>>i;
      }
-     sort(begin(v),end(v));
-     if(v[0]==v[2*n-1])
+     int odd=0;
+     for(auto i:v)
      {
-          cout<<"-1"<<endl;
+          if(i%2==1)
+          {
+               odd++;
+          }
      }
-     else{
+     if(odd==0 || odd==n)
+     {
           for(auto i:v)
           {
-               cout<<i<<" ";
+               cout<<i<<' ';
           }
+     }
+     else{
+          sort(begin(v),end(v));
+          for(auto i:v)
+          {
+               cout<<i<<' ';
+          }cout<<endl;
      }
 }
 
