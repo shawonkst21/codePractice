@@ -36,43 +36,41 @@ int32_t main()
          {
             cin>>i;
          }
-         for(auto &i:b)
+         int cnt=0,ex=INT_MAX,val=0;
+         for(int i=0;i<n;i++)
          {
-            cin>>i;
+            cin>>b[i];
+            if(a[i]<b[i])
+            {
+               cnt++;
+               val+=abs(a[i]-b[i]);
+            }
+            else{
+               ex=min(abs(a[i]-b[i]),ex);
+
+            }
          }
-         if(b[0]<a[0])
+
+         if(cnt<2)
          {
-            no;
+             if(cnt)
+             {
+                 if(val<=ex)
+                 {
+                    yes;
+                 }
+                 else{
+                    no;
+                 }
+             }
+             else{
+               yes;
+             }
          }
          else{
-               int x=b[0]-a[0];
-               int cnt=1;
-               for(int i=1;i<n;i++)
-               {
-                      a[i]-=x;
-                      if(a[i]<0)
-                      {
-                         break;    
-                      }
-                      if(a[i]>b[i])
-                      {
-                         break;
-                      }
-                      else{
-                        int y=b[i]-a[i];
-                              x+=y;
-                              cnt++;
-                        }
-               }
-               if(cnt==n)
-               {
-                    yes;
-               }
-               else{
-                    no;
-               }
-
+          no;
          }
+     
      }
 }
 
