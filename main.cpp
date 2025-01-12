@@ -27,34 +27,52 @@ void faster()
 int32_t main()
 {
      faster();
-     int n;
-     cin>>n;
-     vi v(n);
-     for(auto &i:v)
+     testCase
      {
-          cin>>i;
-     }
-     int odd=0;
-     for(auto i:v)
-     {
-          if(i%2==1)
-          {
-               odd++;
-          }
-     }
-     if(odd==0 || odd==n)
-     {
-          for(auto i:v)
-          {
-               cout<<i<<' ';
-          }
-     }
-     else{
-          sort(begin(v),end(v));
-          for(auto i:v)
-          {
-               cout<<i<<' ';
-          }cout<<endl;
+         int n;
+         cin>>n;
+         vi a(n),b(n);
+         for(auto &i:a)
+         {
+            cin>>i;
+         }
+         for(auto &i:b)
+         {
+            cin>>i;
+         }
+         if(b[0]<a[0])
+         {
+            no;
+         }
+         else{
+               int x=b[0]-a[0];
+               int cnt=1;
+               for(int i=1;i<n;i++)
+               {
+                      a[i]-=x;
+                      if(a[i]<0)
+                      {
+                         break;    
+                      }
+                      if(a[i]>b[i])
+                      {
+                         break;
+                      }
+                      else{
+                        int y=b[i]-a[i];
+                              x+=y;
+                              cnt++;
+                        }
+               }
+               if(cnt==n)
+               {
+                    yes;
+               }
+               else{
+                    no;
+               }
+
+         }
      }
 }
 
