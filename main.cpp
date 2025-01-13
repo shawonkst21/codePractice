@@ -19,6 +19,10 @@ void faster()
      ios_base::sync_with_stdio(false);
      cin.tie(NULL);
 }
+#define input(a)      \
+    for (auto &x : a) \
+    cin >> x
+
 #define testCase \
     int t;       \
     cin >> t;    \
@@ -31,46 +35,33 @@ int32_t main()
      {
          int n;
          cin>>n;
-         vi a(n),b(n);
-         for(auto &i:a)
-         {
-            cin>>i;
-         }
-         int cnt=0,ex=INT_MAX,val=0;
+         vi v(n);
+         input(v);
+         mii m;
          for(int i=0;i<n;i++)
-         {
-            cin>>b[i];
-            if(a[i]<b[i])
+          {
+               m[v[i]]++;
+          }
+          int cnt=0;
+          int ans=0;
+          for(auto i:m)
+          {
+               if(i.second==1)
+               {
+                    cnt++;
+               }
+          }
+            if(cnt&1)
             {
-               cnt++;
-               val+=abs(a[i]-b[i]);
+               ans=cnt+1;
             }
             else{
-               ex=min(abs(a[i]-b[i]),ex);
-
+               ans=cnt;
             }
-         }
+          int x=m.size()-cnt;
+          ans+=x;
+          cout<<ans<<endl;
 
-         if(cnt<2)
-         {
-             if(cnt)
-             {
-                 if(val<=ex)
-                 {
-                    yes;
-                 }
-                 else{
-                    no;
-                 }
-             }
-             else{
-               yes;
-             }
-         }
-         else{
-          no;
-         }
-     
      }
 }
 
