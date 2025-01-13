@@ -1,29 +1,24 @@
 class Solution {
 public:
-    bool canConstruct(string s, int k) {
-        int n=s.size();
-        if(n==k)
-        {
-            return true;
+    int minimumLength(string s) {
+        int n = s.size();
+        map<int, int> m;
+        for (auto i : s) {
+            m[i - 'a']++;
         }
-        else if(n<k)
-        {
-             return false;
-        }
-        map<char,int>m;
-        for(auto i:s)
-        {
-            m[i]++;
-        }
-        int cnt=0;
-         for(auto i:m)
-         {
-            if(i.second%2==1)
-            {
-                cnt++;
+        int ans = 0;
+        for (int i = 0; i < 26; i++) {
+            if (m[i] >= 3) {
+                int x = m[i] % 2;
+                if (x == 0) {
+                    ans += 2;
+                } else {
+                    ans += 1;
+                }
+            } else {
+                ans += m[i];
             }
-         }
-         if(cnt>k)return false;
-         return true;
+        }
+        return ans;
     }
 };
