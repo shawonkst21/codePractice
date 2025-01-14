@@ -33,34 +33,21 @@ int32_t main()
      faster();
      testCase
      {
-         int n;
-         cin>>n;
-         vi v(n);
-         input(v);
-         mii m;
-         for(int i=0;i<n;i++)
-          {
-               m[v[i]]++;
-          }
-          int cnt=0;
-          int ans=0;
-          for(auto i:m)
-          {
-               if(i.second==1)
-               {
-                    cnt++;
-               }
-          }
-            if(cnt&1)
-            {
-               ans=cnt+1;
-            }
-            else{
-               ans=cnt;
-            }
-          int x=m.size()-cnt;
-          ans+=x;
-          cout<<ans<<endl;
+        int n,k;
+        cin>>n>>k;
+        vi a(n),b(n);
+        input(a);
+        input(b);
+        int sum=0;
+        int res=0;
+        int mx=0;
+        for(int i=0;i<min(n,k);i++)
+        {
+           sum+=a[i];
+           mx=max(mx,b[i]);
+           res=max(res,sum+(mx*(k-i-1)));
+        }
+        cout<<res<<endl;
 
      }
 }
