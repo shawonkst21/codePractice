@@ -1,23 +1,39 @@
 class Solution {
 public:
-    int minimumLength(string s) {
-        int n = s.size();
-        map<int, int> m;
-        for (auto i : s) {
-            m[i - 'a']++;
+    vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+                int n=A.size();
+        vector<int>idx1(n+10),idx2(n+10);
+        for(int i=0;i<n;i++)
+        {
+            idx1[A[i]]=i;
         }
-        int ans = 0;
-        for (int i = 0; i < 26; i++) {
-            if (m[i] >= 3) {
-                int x = m[i] % 2;
-                if (x == 0) {
-                    ans += 2;
-                } else {
-                    ans += 1;
-                }
-            } else {
-                ans += m[i];
+          for(int i=0;i<n;i++)
+        {
+            idx2[B[i]]=i;
+        }
+        vector<int>ans;
+        for(int i=0;i<n;i++)
+        {
+            if(A[i]==B[i])
+            {
+                ans.push_back(1);
             }
+            else{
+                int x=0;
+                if(idx1[B[i]]<i)
+                {
+                    x++;
+                }
+                 if(idx2[A[i]]<i)
+                {
+                    x++;
+                }
+               ans.push_back(x);
+            }
+        }
+        for(int i=1;i<n;i++)
+        {
+            ans[i]+=ans[i-1];
         }
         return ans;
     }
