@@ -42,24 +42,25 @@ bool checkParity(int a,int b)
 int32_t main() {
     faster();
     testCase{
-        int n;
-        cin>>n;
-        vi v(n);
-        input(v);
-        int cur=0, mx=LLONG_MIN;
-        for(int i=0;i<n;i++)
+      int n;
+      cin>>n;
+      string s,r;
+      cin>>s>>r;
+      int cnt=count(s.begin(),s.end(),'0');
+      int cnt1=n-cnt;
+      string ans="YES";
+      for(int i=0;i<n-1;i++)
+      {
+        if(cnt==0 || cnt1==0)
         {
-            cur+=v[i];
-            mx=max(mx,cur);
-            if(i!=n-1)
-            {
-                if(cur<0 || checkParity(v[i],v[i+1]))
-                {
-                    cur=0;
-                }
-            }
-
+            ans="NO";
+            break;
         }
-        cout<<mx<<endl;
+        if(r[i]=='1')cnt--;
+        else{
+            cnt1--;
+        }
+      }
+      cout<<ans<<endl;
     }
 }
