@@ -13,6 +13,7 @@ int dy[] = {-1, 1, 0, 0};
 #define vi vector<int>
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
+#define setBits(a) (int)__builtin_popcountll(a)
 // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
@@ -33,39 +34,37 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
+int knapsackValueBased(int n,int w,vector<int>&a,vector<int>&b)
+{
+     int max_v = 100000;
+     vector<int> dp(max_v + 1, LLONG_MAX);
+     dp[0]=0;
 
-int32_t main() {
-    faster();
-    testCase {
-        int n;
-        cin >> n;
-        vi v(n);
-        input(v);
-        vector<pair<int, int>> arr;
-        for (int i = 0; i < n; i++) {
-            arr.push_back({v[i], i});
-        }
-
-        sort(arr.begin(), arr.end());
-
-        vector<int> prefix(n);
-        prefix[0] = arr[0].first;
-        for (int i = 1; i < n; i++) {
-            prefix[i] = prefix[i - 1] + arr[i].first;
-        }
-
-        vector<int> ans(n);
-
-        ans[arr[n - 1].second] = n - 1;
-
-        for (int i = n - 2; i >= 0; i--) {
-            if (prefix[i] >= arr[i + 1].first) {
-                ans[arr[i].second] = ans[arr[i + 1].second];
-            } else {
-                ans[arr[i].second] = i;
+     for (int i = 0; i < n; i++) {
+        int w = a[i], v = b[i];
+        for (int j = max_v; j >= v; j--) {
+            if (dp[j - v] != LLONG_MAX) {
+                dp[j] = min(dp[j], dp[j - v] + w);
             }
         }
-        output(ans);
     }
-    return 0;
+      int result = 0;
+      for (int v = 0; v <= max_v; v++) {
+        if (dp[v] <= w) {
+            result = v;
+        }
+    }
+    return result;
+
+}
+int32_t main() {
+    faster();
+      int n, w;
+       cin >> n >> w;
+       vi a(n), b(n);
+       for (int i = 0; i < n; i++) {
+           cin >> a[i] >> b[i];
+       }
+       int maxValue = knapsackValueBased(n, w, a, b);
+       cout << maxValue << endl;
 }
