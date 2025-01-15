@@ -23,7 +23,12 @@ void faster() {
 #define input(a)      \
     for (auto &x : a) \
         cin >> x
-
+#define output(a)             \
+    {                         \
+        for (auto &x : a)     \
+            cout << x << ' '; \
+        cout << endl;         \
+    }
 #define testCase \
     int t;       \
     cin >> t;    \
@@ -36,30 +41,23 @@ int32_t main() {
         cin >> n;
         vi v(n);
         input(v);
-
-        // Create a vector of pairs to handle duplicates and maintain indices
         vector<pair<int, int>> arr;
         for (int i = 0; i < n; i++) {
             arr.push_back({v[i], i});
         }
 
-        // Sort by value
         sort(arr.begin(), arr.end());
 
-        // Calculate prefix sum
         vector<int> prefix(n);
         prefix[0] = arr[0].first;
         for (int i = 1; i < n; i++) {
             prefix[i] = prefix[i - 1] + arr[i].first;
         }
 
-        // Result array
         vector<int> ans(n);
 
-        // Initialize for the largest element
         ans[arr[n - 1].second] = n - 1;
 
-        // Process from right to left
         for (int i = n - 2; i >= 0; i--) {
             if (prefix[i] >= arr[i + 1].first) {
                 ans[arr[i].second] = ans[arr[i + 1].second];
@@ -67,12 +65,7 @@ int32_t main() {
                 ans[arr[i].second] = i;
             }
         }
-
-        // Output the result
-        for (auto i : ans) {
-            cout << i << ' ';
-        }
-        cout << endl;
+        output(ans);
     }
     return 0;
 }
