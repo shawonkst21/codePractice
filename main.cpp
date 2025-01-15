@@ -44,23 +44,31 @@ int32_t main() {
     testCase{
       int n;
       cin>>n;
-      string s,r;
-      cin>>s>>r;
-      int cnt=count(s.begin(),s.end(),'0');
-      int cnt1=n-cnt;
-      string ans="YES";
-      for(int i=0;i<n-1;i++)
+      vi v(n);
+      input(v);
+      vi cnt(n+10);
+      for(int i=0;i<n;i++)
       {
-        if(cnt==0 || cnt1==0)
-        {
-            ans="NO";
-            break;
-        }
-        if(r[i]=='1')cnt--;
-        else{
-            cnt1--;
-        }
+        int x=setBits(v[i]);
+        cnt[v[i]]=x;
       }
-      cout<<ans<<endl;
+       bool ok=true;
+       for(int i=1;i<=n;i++)
+       {
+           if(cnt[i]==cnt[v[i-1]])
+           {
+             continue;
+           }
+           else{
+            ok=false;
+           }
+       }
+       if(ok==true){
+         yes;
+       }
+       else{
+        no;
+       }
+
     }
 }
