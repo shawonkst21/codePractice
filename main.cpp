@@ -34,37 +34,32 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-int knapsackValueBased(int n,int w,vector<int>&a,vector<int>&b)
+
+bool checkParity(int a,int b)
 {
-     int max_v = 100000;
-     vector<int> dp(max_v + 1, LLONG_MAX);
-     dp[0]=0;
-
-     for (int i = 0; i < n; i++) {
-        int w = a[i], v = b[i];
-        for (int j = max_v; j >= v; j--) {
-            if (dp[j - v] != LLONG_MAX) {
-                dp[j] = min(dp[j], dp[j - v] + w);
-            }
-        }
-    }
-      int result = 0;
-      for (int v = 0; v <= max_v; v++) {
-        if (dp[v] <= w) {
-            result = v;
-        }
-    }
-    return result;
-
+    return (a%2==b&2);
 }
 int32_t main() {
     faster();
-      int n, w;
-       cin >> n >> w;
-       vi a(n), b(n);
-       for (int i = 0; i < n; i++) {
-           cin >> a[i] >> b[i];
-       }
-       int maxValue = knapsackValueBased(n, w, a, b);
-       cout << maxValue << endl;
+    testCase{
+        int n;
+        cin>>n;
+        vi v(n);
+        input(v);
+        int cur=0, mx=LLONG_MIN;
+        for(int i=0;i<n;i++)
+        {
+            cur+=v[i];
+            mx=max(mx,cur);
+            if(i!=n-1)
+            {
+                if(cur<0 || checkParity(v[i],v[i+1]))
+                {
+                    cur=0;
+                }
+            }
+
+        }
+        cout<<mx<<endl;
+    }
 }
