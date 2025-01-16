@@ -1,33 +1,23 @@
 class Solution {
 public:
-    bool isSet(int &x, int bit) {
-        return x & (1 << bit);
-    }
-    bool isUnset(int x, int bit) {
-        return (x & (1 << bit)) == 0;
-    }
-
-    int minimizeXor(int num1, int num2) {
-        int x = 0;
-
-        int cnt = __builtin_popcount(num2);
-
-        for(int bit = 31; bit >= 0 && cnt > 0; bit--) {
-            if((num1&(1<<bit))!=0) {
-                x|=(1<<bit);
-                cnt--;
+    int xorAllNums(vector<int>& nums1, vector<int>& nums2) {
+        int n1=nums1.size();
+        int n2=nums2.size();
+        int ans=0;
+        for(auto i:nums1)
+        {
+            if(n2%2!=0)
+            {
+                ans^=i;
             }
         }
-
-        for(int bit = 0; bit < 32 && cnt > 0; bit++) {
-            if((num1&(1<<bit))==0) {
-                x|=(1<<bit);
-                cnt--;
+         for(auto i:nums2)
+        {
+            if(n1%2!=0)
+            {
+                ans^=i;
             }
         }
-
-        return x;
-        
+        return ans;
     }
 };
-

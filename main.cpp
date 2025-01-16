@@ -42,33 +42,14 @@ bool checkParity(int a,int b)
 int32_t main() {
     faster();
     testCase{
-      int n;
-      cin>>n;
-      vi v(n);
-      input(v);
-      vi cnt(n+10);
-      for(int i=0;i<n;i++)
-      {
-        int x=setBits(v[i]);
-        cnt[v[i]]=x;
-      }
-       bool ok=true;
-       for(int i=1;i<=n;i++)
-       {
-           if(cnt[i]==cnt[v[i-1]])
-           {
-             continue;
-           }
-           else{
-            ok=false;
-           }
-       }
-       if(ok==true){
-         yes;
-       }
-       else{
-        no;
-       }
-
+            int x;
+            cin>>x;
+            if(x%33==0)
+            {
+                yes;
+            }
+            else{
+                no;
+            }
     }
 }
