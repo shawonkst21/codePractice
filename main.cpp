@@ -14,12 +14,13 @@ int dy[] = {-1, 1, 0, 0};
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
-// priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
+//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 }
+
 
 #define input(a)      \
     for (auto &x : a) \
@@ -34,56 +35,42 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-void solve()
-{
-     int n,k;
-         cin>>n>>k;
-         vi v(n);
-         input(v);
-         vi frq(21,0);
-         for(auto i:v)
-         {
-             frq[i]++;
-         }
-         if(frq[k]==*max_element(begin(frq),end(frq))){
-             cout<<"0"<<endl;
-         }
-         else{
-             auto temp=frq;
-             for(int i=0;i<n;i++)
-             {
-                 frq[v[i]]--;
-                 if(frq[k]==0)
-                 {
-                     break;
-                 }
-                 if(frq[k]==*max_element(begin(frq),end(frq)))
-                 {
-                     cout<<"1"<<endl;
-                     return;
-                 }
-             }
-             frq=temp;
-             for(int i=n-1;i>=0;i--)
-             {
-                 frq[v[i]]--;
-                 if(frq[k]==0)
-                 {
-                     break;
-                 }
-                 if(frq[k]==*max_element(begin(frq),end(frq)))
-                 {
-                     cout<<"1"<<endl;
-                     return;
-                 }
-             }
-             cout<<"2"<<endl;
-             return;
-         }
-}
+
 int32_t main() {
     faster();
     testCase{
-     solve();
+     
+     int n;
+     cin>>n;
+     string str;
+     cin>>str;
+     stack<int>s;
+     s.push(1);
+     int ans=0;
+     for(int i=1;i<n;i++)
+     {
+        if(str[i]=='_' && s.empty()==false)
+        {
+               ans++;
+               s.pop();
+        }
+        else if(str[i]=='_' && s.empty()==true){
+            s.push(i+1);
+        }
+        else{
+            if(str[i]=='(')
+            {
+                s.push(i+1);
+            }
+            else{
+                ans+=((i+1)-s.top());
+                s.pop();
+            }
+        }
+     }
+     cout<<ans<<endl;
+
+        
     }
+
 }
