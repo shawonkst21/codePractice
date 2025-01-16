@@ -34,22 +34,56 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-
-bool checkParity(int a,int b)
+void solve()
 {
-    return (a%2==b&2);
+     int n,k;
+         cin>>n>>k;
+         vi v(n);
+         input(v);
+         vi frq(21,0);
+         for(auto i:v)
+         {
+             frq[i]++;
+         }
+         if(frq[k]==*max_element(begin(frq),end(frq))){
+             cout<<"0"<<endl;
+         }
+         else{
+             auto temp=frq;
+             for(int i=0;i<n;i++)
+             {
+                 frq[v[i]]--;
+                 if(frq[k]==0)
+                 {
+                     break;
+                 }
+                 if(frq[k]==*max_element(begin(frq),end(frq)))
+                 {
+                     cout<<"1"<<endl;
+                     return;
+                 }
+             }
+             frq=temp;
+             for(int i=n-1;i>=0;i--)
+             {
+                 frq[v[i]]--;
+                 if(frq[k]==0)
+                 {
+                     break;
+                 }
+                 if(frq[k]==*max_element(begin(frq),end(frq)))
+                 {
+                     cout<<"1"<<endl;
+                     return;
+                 }
+             }
+             cout<<"2"<<endl;
+             return;
+         }
 }
 int32_t main() {
     faster();
     testCase{
-            int x;
-            cin>>x;
-            if(x%33==0)
-            {
-                yes;
-            }
-            else{
-                no;
-            }
+     solve();
     }
 }
