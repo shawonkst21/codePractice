@@ -21,7 +21,6 @@ void faster() {
     cin.tie(NULL);
 }
 
-
 #define input(a)      \
     for (auto &x : a) \
         cin >> x
@@ -39,38 +38,6 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-     
-     int n;
-     cin>>n;
-     string str;
-     cin>>str;
-     stack<int>s;
-     s.push(1);
-     int ans=0;
-     for(int i=1;i<n;i++)
-     {
-        if(str[i]=='_' && s.empty()==false)
-        {
-               ans++;
-               s.pop();
-        }
-        else if(str[i]=='_' && s.empty()==true){
-            s.push(i+1);
-        }
-        else{
-            if(str[i]=='(')
-            {
-                s.push(i+1);
-            }
-            else{
-                ans+=((i+1)-s.top());
-                s.pop();
-            }
-        }
-     }
-     cout<<ans<<endl;
-
         
     }
-
 }

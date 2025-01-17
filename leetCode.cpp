@@ -1,23 +1,41 @@
 class Solution {
 public:
-    int xorAllNums(vector<int>& nums1, vector<int>& nums2) {
-        int n1=nums1.size();
-        int n2=nums2.size();
-        int ans=0;
-        for(auto i:nums1)
+    bool doesValidArrayExist(vector<int>& derived) {
+        int n=derived.size();
+        vector<int>temp(n);
+        temp[0]=0;
+        for(int i=0;i<n;i++)
         {
-            if(n2%2!=0)
+            if(i!=n-1)
             {
-                ans^=i;
+                temp[i+1]=temp[i]^derived[i];
+            }
+            else{
+                if(temp[0]==temp[i]^derived[i])
+                {
+                    return true;
+                }
+               
             }
         }
-         for(auto i:nums2)
+        temp.clear();
+        temp[0]=1;
+        for(int i=0;i<n;i++)
         {
-            if(n1%2!=0)
+            if(i!=n-1)
             {
-                ans^=i;
+                temp[i+1]=temp[i]^derived[i];
+            }
+            else{
+                if(temp[0]==temp[i]^derived[i])
+                {
+                    return true;
+                }
+               
             }
         }
-        return ans;
+        return false;
+
+        
     }
 };
