@@ -34,26 +34,23 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-
+#define int d=2000;
 int32_t main() {
     faster();
     testCase{
-        int n,m;
-        cin>>n>>m;
-        vi x(n),y(n);
-        for(int i=0;i<n;i++)
-        {
-            cin>>x[i]>>y[i];
-        }
-        int ans=0;
-        for(int i=0;i<n-1;i++)
-        {
-            ans+=4*m;
-            int w=m-x[i+1];
-            int h=m-y[i+1];
-            ans-=(2*(w+h));
-        }
-        ans+=4*m;
-        cout<<ans<<endl;
+        int n;
+        cin>>n;
+        vi v(n);
+        input(v);
+        vector<vector<int>>pre(d,vector<int>(d+10,0));
+        int x=n;
+       for(int i=1;i<=n;i++)
+       {
+          for(int j=0;j<n;j++)
+          {
+            pre[i][v[j]]++;
+          }
+       }
+
     }
 }
