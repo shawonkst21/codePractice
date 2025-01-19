@@ -37,22 +37,34 @@ void faster() {
 
 int32_t main() {
     faster();
-    int n;
-    cin>>n;
-    vector<pair<int,int>>v;
-    for(int i=0;i<n;i++)
-    {
-        int x,y;
-        cin>>x>>y;
-        v.push_back({x,y});
+    testCase{
+        string str;
+        cin>>str;
+        int n=str.size();
+        int x=-1;
+        for(int i=0;i<n;i++)
+        {
+            if(str[i]=='0')
+            {
+                x=i;
+                break;
+            }
+        }
+        if(x==-1)
+        {
+            cout<<1<<" "<<str.size()<<' '<<n<<' '<<n<<endl;
+            continue;
+        }
+        int y=x-1;
+        for(int i=x;i<n && y>=0;i++)
+        {
+            if(str[i]=='1')
+            {
+                break;
+            }
+            y--;
+        }
+        y++;
+        cout<<1<<' '<<n<<' '<<y+1<<' '<<n+y-x<<endl;
     }
-    sort(begin(v),end(v));
-    
-    int ans=0,time=0;
-    for(auto i:v)
-    {
-        time+=i.first;
-        ans+=(i.second-time);
-    }
-    cout<<ans<<endl;
 }
