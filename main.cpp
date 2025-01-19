@@ -38,33 +38,60 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-        string str;
-        cin>>str;
-        int n=str.size();
-        int x=-1;
+        int n,m;
+        cin>>n>>m;
+       vector<int>v(2010);
         for(int i=0;i<n;i++)
         {
-            if(str[i]=='0')
+            for(int j=0;j<m;j++)
             {
-                x=i;
-                break;
+                int x;
+                cin>>x;
+                v[x]=i+1;
             }
         }
-        if(x==-1)
+        vector<int>ans;
+        vector<int>visited(n*m,-1);
+        for(int i=0;i<n*m;i++)
         {
-            cout<<1<<" "<<str.size()<<' '<<n<<' '<<n<<endl;
+            if(visited[i]==-1)
+            {
+                int x=v[i];
+            bool ok=true;
+            for(int j=i;j<n*m;j+=n)
+            {
+                visited[j]=0;
+                if(v[j]==x)
+                {
+                    continue;
+                }
+                else{
+                    ok=false;
+                    break;
+                }
+            }
+            if(ok==true)
+            {
+                ans.push_back(x);
+            }
+            else{
+                break;
+            }
+            }
+        }
+        if(ans.size()!=n)
+        {
+            cout<<"-1"<<endl;
             continue;
         }
-        int y=x-1;
-        for(int i=x;i<n && y>=0;i++)
-        {
-            if(str[i]=='1')
+
+            for(auto i:ans)
             {
-                break;
-            }
-            y--;
-        }
-        y++;
-        cout<<1<<' '<<n<<' '<<y+1<<' '<<n+y-x<<endl;
+                cout<<i<<' ';
+            }cout<<endl;
+        
+       
+       
     }
 }
+
