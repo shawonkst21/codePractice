@@ -34,23 +34,25 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-#define int d=2000;
+
 int32_t main() {
     faster();
-    testCase{
-        int n;
-        cin>>n;
-        vi v(n);
-        input(v);
-        vector<vector<int>>pre(d,vector<int>(d+10,0));
-        int x=n;
-       for(int i=1;i<=n;i++)
-       {
-          for(int j=0;j<n;j++)
-          {
-            pre[i][v[j]]++;
-          }
-       }
-
+    int n;
+    cin>>n;
+    vector<pair<int,int>>v;
+    for(int i=0;i<n;i++)
+    {
+        int x,y;
+        cin>>x>>y;
+        v.push_back({x,y});
     }
+    sort(begin(v),end(v));
+    
+    int ans=0,time=0;
+    for(auto i:v)
+    {
+        time+=i.first;
+        ans+=(i.second-time);
+    }
+    cout<<ans<<endl;
 }
