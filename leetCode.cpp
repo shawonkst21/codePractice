@@ -1,37 +1,41 @@
 class Solution {
 public:
-    long long gridGame(vector<vector<int>>& g) {
-        int m=g[0].size();
-        vector<vector<long long>>grid(2,vector<long long>(m));
-        grid[0][0]=g[0][0];
-            for(int j=1;j<m;j++)
+int dx[4] = {0, 0, -1, 1};
+int dy[4] = {-1, 1, 0, 0};
+    vector<vector<int>> highestPeak(vector<vector<int>>& mat) {
+          int m=mat.size();
+        int n=mat[0].size();
+        vector<vector<int>>ans(m,vector<int>(n,-1));
+        queue<pair<int,int>>s;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
             {
-                grid[0][j]=g[0][j]+grid[0][j-1];
+                  if(mat[i][j]==1)
+                  {
+                    s.push({i,j});
+                    ans[i][j]=0;
+                  }
             }
-             grid[1][m-1]=g[1][m-1];
-             for(int j=m-2;j>=0;j--)
+        }
+        while(!s.empty())
+        {
+            auto temp=s.front();
+            s.pop();
+            int i=temp.first;
+            int j=temp.second;
+            for(int c=0;c<4;c++)
             {
-                grid[1][j]=g[1][j]+grid[1][j+1];
+                int i_=i+dx[c];
+                int j_=j+dy[c];
+                if(i_>=0 && i_<m && j_>=0 && j_<n && ans[i_][j_]==-1)
+                {
+                     ans[i_][j_]=ans[i][j]+1;
+                     s.push({i_,j_});
+                }
             }
-           long long mx=LLONG_MAX;
-           for(int i=m-1;i>=0;i--)
-           {
-              long long sum;
-              if(i==m-1)
-              {
-                sum=grid[1][0]-grid[1][i];
-              }
-              else if(i==0)
-              {
-                 sum=grid[0][m-1]-grid[0][0];
-              }
-              else{
-                sum=max((grid[0][m-1]-grid[0][i]),(grid[1][0]-grid[1][i]));
-              }
-              mx=min(sum,mx);
-           }
-          return mx;
-        
-     
+
+        }
+        return ans;
     }
 };
