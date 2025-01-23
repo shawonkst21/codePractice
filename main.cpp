@@ -14,61 +14,63 @@ int dy[] = {-1, 1, 0, 0};
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
-//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
-void faster() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+#define mod 1000000007
+// priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
+
+void faster()
+{
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
 }
 
-#define input(a)      \
-    for (auto &x : a) \
-        cin >> x
-#define output(a)             \
-    {                         \
-        for (auto &x : a)     \
-            cout << x << ' '; \
-        cout << endl;         \
-    }
+#define input(a)    \
+  for (auto &x : a) \
+  cin >> x
+#define output(a)       \
+  {                     \
+    for (auto &x : a)   \
+      cout << x << ' '; \
+    cout << endl;       \
+  }
 #define testCase \
-    int t;       \
-    cin >> t;    \
-    while (t--)
+  int t;         \
+  cin >> t;      \
+  while (t--)
 
-int32_t main() {
-    faster();
-    testCase{
-        int n;
-        cin>>n;
-        vector<vector<int>>adj(n+1);
-        vector<int>deg(n+3,0);
-        for(int i=0;i<n-1;i++)
+int32_t main()
+{
+  faster();
+  int n;
+  cin >> n;
+  vi a(n + 1);
+  for (int i = 1; i <= n; i++)
+    cin >> a[i];
+  vector<vi> dp(n + 2, vi(n + 2, 0));
+  for (int i = n; i >= 1; i--)
+  {
+    for (int j = i; j <= n; j++)
+    {
+      if (i == j)
+      {
+        dp[i][j] = 1;
+      }
+      else
+      {
+        dp[i][j] = 1 + dp[i + 1][j];
+        if (a[i] == a[i + 1])
         {
-            int u,v;
-            cin>>u>>v;
-            adj[u].pb(v);
-            adj[v].pb(u);
-            deg[u]++;
-            deg[v]++;
+          dp[i][j] = min(dp[i][j], 1 + dp[i + 2][j]);
         }
-        int max1 = 0, node1 = -1;
-        for (int i = 1; i <= n; i++) {
-            if (deg[i] > max1) {
-                max1 = deg[i];
-                node1 = i;
-            }
-        }
-        deg[node1] = 0;
-        for(auto i:adj[node1])
+
+        for (int k = i + 2; k <= j; k++)
         {
-            deg[i]--;
+          if (a[i] == a[k])
+          {
+            dp[i][j] = min(dp[i][j], dp[i + 1][k - 1] + dp[k + 1][j]);
+          }
         }
-         int max2 = 0;
-        for (int i = 1; i <= n; i++) {
-            if (deg[i] > max2) {
-                max2 = deg[i];
-            }
-        }
-        cout<<(max1+max2)-1<<endl;
-        
+      }
     }
+  }
+  cout << dp[1][n] << endl;
 }
