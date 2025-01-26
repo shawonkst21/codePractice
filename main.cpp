@@ -46,6 +46,7 @@ int32_t main() {
           s.push(i*i);
         }
         int sum=0;
+        int cnt=0;
         vector<int>ans(n,-1);
         for(int i=n-1;i>=0;)
         {
