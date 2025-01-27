@@ -47,6 +47,7 @@ int32_t main() {
         }
         int sum=0;
         int cnt=0;
+        int c=0;
         vector<int>ans(n,-1);
         for(int i=n-1;i>=0;)
         {
