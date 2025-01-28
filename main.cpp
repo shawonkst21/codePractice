@@ -38,36 +38,7 @@ void faster() {
 
 int32_t main() {
     faster();
-    testCase{
-        int n;
-        cin>>n;
-        stack<int>s;
-        for(int i=0;i<n;i++){
-          s.push(i*i);
-        }
-        int sum=0;
-        int cnt=0;
-        int c=0;
-        vector<int>ans(n,-1);
-        for(int i=n-1;i>=0;)
-        {
-          if(ans[i]==-1)
-          {
-              if(s.top()-i>i)
-              {
-                s.pop();
-              }
-              else{
-                int x=s.top()-i;
-                ans[x]=i;
-                ans[i]=x;
-                i--;
-              }
-          }
-          else{
-            i--;
-          }
-        }
-        output(ans);
-    }
+    int n,m;
+    cin>>n>>m;
+    cout<<(n*m)/2<<endl;
 }
