@@ -35,10 +35,26 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-
+vector<int>f{0, 1, 2, 1, 2, 3, 1, 2, 3, 2, 1, 2, 2, 2, 3};
 int32_t main() {
     faster();
-    int n,m;
-    cin>>n>>m;
-    cout<<(n*m)/2<<endl;
+    testCase{
+        int n;
+        cin>>n; 
+        if(n<15)
+        {
+            cout<<f[n%15]<<endl;
+        }
+        else if(n%15==5)
+        {
+            cout<<n/15+1<<endl;
+        }
+        else if(n%15==8)
+        {
+            cout<<n/15+2<<endl;
+        }
+        else{
+            cout<<n/15+f[n%15]<<endl;
+        }
+    }
 }
