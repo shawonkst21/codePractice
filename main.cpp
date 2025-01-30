@@ -16,7 +16,6 @@ int dy[] = {-1, 1, 0, 0};
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
 //priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
-#define pii pair<int, int>
 
 void faster() {
     ios_base::sync_with_stdio(false);
@@ -40,47 +39,45 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-        int n,p;
-        cin>>n>>p;
-        vi v(n);
-        input(v);
-        queue<pii> q;  
-        vi t(n, -1);
-        for(int i=0;i<n;i++)
-        {
-            if(v[i]==0)
-            {
-                q.push({i,0});
-                t[i]=0;
-            }
-        }
-        while(!q.empty())
-        {
-            pair<int,int>temp=q.front();
-            int index=temp.first;
-            int tt=temp.second;
-            q.pop();
-            int lava=p*(tt+1);
-            int left=index-1;
-            while(left>=0 && v[left]>0 && t[left]==-1){
-                if(v[left]<=lava)
-                {
-                    t[left]=tt+1;
-                    q.push({left,tt+1});
-                }else{
-                    break;
-                }
-                left--;
-            }
-           int right = index + 1;
-            while (right < n && v[right] > 0 && t[right] == -1) {
-                if (v[right] <= lava) {
-                    t[right] = tt + 1; 
-                    q.push({right, tt + 1});
-                } else break;
-                right++;
-            }
-        }
-          output(t);
+       int n;
+       char c;
+       cin>>n>>c;
+       string str;
+       cin>>str;
+       int odd=0,even=0;
+       for(int i=0;i<n;i++)
+       {
+          if(str[i]!=c)
+          {
+              if(i%2==0)
+              {
+                 odd++;
+              }
+              else{
+                even++;
+              }
+          }
+       }
+       if(odd==0 && even==0)
+       {
+          cout<<'0'<<endl;
+       }
+       else{
+              if(odd>0 && even>0)
+              {
+                  cout<<'2'<<endl;
+                  cout<<'2'<<' '<<'3'<<endl;
+              }
+              else if(odd==0 && even>0)
+              {
+                cout<<'1'<<endl;
+                cout<<'3'<<endl;
+              }
+              else{
+                cout<<'1'<<endl;
+                cout<<'2'<<endl;
+              }
+       }
+
     }
 }
