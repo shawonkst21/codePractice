@@ -39,45 +39,40 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-       int n;
-       char c;
-       cin>>n>>c;
-       string str;
-       cin>>str;
-       int odd=0,even=0;
-       for(int i=0;i<n;i++)
-       {
-          if(str[i]!=c)
-          {
-              if(i%2==0)
-              {
-                 odd++;
-              }
-              else{
-                even++;
-              }
-          }
-       }
-       if(odd==0 && even==0)
-       {
-          cout<<'0'<<endl;
-       }
-       else{
-              if(odd>0 && even>0)
-              {
-                  cout<<'2'<<endl;
-                  cout<<'2'<<' '<<'3'<<endl;
-              }
-              else if(odd==0 && even>0)
-              {
-                cout<<'1'<<endl;
-                cout<<'3'<<endl;
-              }
-              else{
-                cout<<'1'<<endl;
-                cout<<'2'<<endl;
-              }
-       }
+        int n;
+        cin>>n;
+        vi v(n);
+        input(v);
+        bool ok=false;
+        if(v[n-2]>v[n-1])
+        {
+            cout<<"-1"<<endl;
+            continue;
+        }
+        vector<tuple<int,int,int>>ans;
+        for(int i=n-3;i>=0;i--)
+        {
+            if(v[i]>v[i+1])
+            {
+                v[i]=v[i+1]-v[n-1];
+                if(v[i]>v[i+1])
+                {
+                    ok=true;
+                    break;
+                }
+                ans.pb({i+1,i+2,n});
+            }
+        }
+        if(ok)
+        {
+              cout<<"-1"<<endl;
 
+        }
+        else{
+            cout<<ans.size()<<endl;
+              for (auto &t : ans) {
+            cout << get<0>(t) << " " <<get<1>(t) << " " <<get<2>(t) << endl;
+        }
+        }
     }
 }
