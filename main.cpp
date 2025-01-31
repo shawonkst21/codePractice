@@ -41,38 +41,39 @@ int32_t main() {
     testCase{
         int n;
         cin>>n;
-        vi v(n);
-        input(v);
-        bool ok=false;
-        if(v[n-2]>v[n-1])
+        string str;
+        cin>>str;
+        vector<int>temp;
+        vi cnt(n,1);
+        for(int i=0;i<n;i++)
         {
-            cout<<"-1"<<endl;
-            continue;
-        }
-        vector<tuple<int,int,int>>ans;
-        for(int i=n-3;i>=0;i--)
-        {
-            if(v[i]>v[i+1])
+            if(str[i]=='1')
             {
-                v[i]=v[i+1]-v[n-1];
-                if(v[i]>v[i+1])
-                {
-                    ok=true;
-                    break;
-                }
-                ans.pb({i+1,i+2,n});
+                temp.pb(i+1);
+                cnt[i]=0;
             }
         }
-        if(ok)
+        int ans=0;
+        for(int i=1;i<=n;i++)
         {
-              cout<<"-1"<<endl;
-
+                for(int j=i;j<=n;j+=i)
+                {
+                    if(cnt[j-1]==0 && str[j-1]=='1')
+                    {
+                        break;
+                    }
+                    else if(str[j-1]=='0' && cnt[j-1]==1)
+                    {
+                        ans+=i;
+                        str[j-1]='1';
+                    }
+                    else{
+                        continue;
+                    }
+                }
+            
         }
-        else{
-            cout<<ans.size()<<endl;
-              for (auto &t : ans) {
-            cout << get<0>(t) << " " <<get<1>(t) << " " <<get<2>(t) << endl;
-        }
-        }
+        cout<<ans<<endl;
+ 
     }
 }
