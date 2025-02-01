@@ -35,45 +35,27 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-
+map<int,int>dp;
+int solve(int n)
+{
+  if(n==0)
+  {
+    return 0;
+  }
+  if(dp[n])
+  {
+    return dp[n];
+  }
+  if(n&1)
+  {
+    return dp[n]=2*solve(n/2)+(n/2)+1;
+  }
+  else 
+  return dp[n]=solve(n/2)+solve(n/2-1)+(n/2);
+}
 int32_t main() {
     faster();
-    testCase{
-        int n;
-        cin>>n;
-        string str;
-        cin>>str;
-        vector<int>temp;
-        vi cnt(n,1);
-        for(int i=0;i<n;i++)
-        {
-            if(str[i]=='1')
-            {
-                temp.pb(i+1);
-                cnt[i]=0;
-            }
-        }
-        int ans=0;
-        for(int i=1;i<=n;i++)
-        {
-                for(int j=i;j<=n;j+=i)
-                {
-                    if(cnt[j-1]==0 && str[j-1]=='1')
-                    {
-                        break;
-                    }
-                    else if(str[j-1]=='0' && cnt[j-1]==1)
-                    {
-                        ans+=i;
-                        str[j-1]='1';
-                    }
-                    else{
-                        continue;
-                    }
-                }
-            
-        }
-        cout<<ans<<endl;
- 
-    }
+    int n;
+    cin>>n;
+    cout<<solve(n)<<endl;
 }
