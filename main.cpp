@@ -8,14 +8,11 @@ using namespace std;
 const int N = 1e5 + 10;
 int dx[] = {0, 0, -1, 1};
 int dy[] = {-1, 1, 0, 0};
-// int dx2[]={0,0,-1,1,1,1,-1,-1};
-// int dy2[]={-1,1,0,0,1,-1,1,-1};
 #define vi vector<int>
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
-//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
     ios_base::sync_with_stdio(false);
@@ -36,47 +33,56 @@ void faster() {
     cin >> t;    \
     while (t--)
 
+// Function to find the MEX of an array
+int findMEX(vector<int>& arr) {
+    unordered_set<int> st(arr.begin(), arr.end());
+    int mex = 0;
+    while (st.count(mex)) mex++;
+    return mex;
+}
+
+// Function to determine the maximum MEX
+int getMaxMEX(int n, vector<vector<int>>& arrivals) {
+    vector<int> queue_state(n, 0);  // Tracks the final number of people in each queue
+    
+    for (int j = 0; j < n; j++) {
+        int best_choice = 0;
+        int max_value = -1;
+        
+        // Add arrivals to all queues
+        for (int i = 0; i < n; i++) {
+            queue_state[i] += arrivals[i][j];
+        }
+        
+        // Choose the best queue to serve (one with the highest value)
+        for (int i = 0; i < n; i++) {
+            if (queue_state[i] > max_value) {
+                max_value = queue_state[i];
+                best_choice = i;
+            }
+        }
+        
+        // Serve the chosen queue (empty it)
+        queue_state[best_choice] = 0;
+    }
+    
+    // Calculate the MEX of the final queue state
+    return findMEX(queue_state);
+}
+
 int32_t main() {
     faster();
-    testCase{
+    testCase {
         int n;
-        cin>>n;
-        vi v(n);
-        input(v);
-        int l=0,r=n-1;
-        int mn=1,mx=n;
-        while(l<=r)
-        {
-            if(v[l]==mn)
-            {
-                l++;
-                mn++;
-            }
-            else if(v[l]==mx)
-            {
-                l++;
-                mx--;
-            }
-            else if(v[r]==mn)
-            {
-                r--;
-                mn++;
-            }
-            else if(v[r]==mx)
-            {
-                r--;
-                mx--;
-            }
-            else{
-                break;
+        cin >> n;
+        vector<vector<int>> arrivals(n, vector<int>(n));
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cin >> arrivals[i][j];
             }
         }
-        if(l<=r)
-        {
-            cout<<l+1<<' '<<r+1<<endl;
-        }
-        else{
-            cout<<"-1"<<endl;
-        }
+
+        cout << getMaxMEX(n, arrivals) << endl;
     }
 }
