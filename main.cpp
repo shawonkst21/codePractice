@@ -41,28 +41,42 @@ int32_t main() {
     testCase{
         int n;
         cin>>n;
-        vi v(n);
-        input(v);
-        map<int,int>m;
-        for(auto i:v)
+        int ans1=-1,ans2=-1;
+        if(n%4==0 || n%4==2)
         {
-            m[i]++;
+            ans1=n/4;
         }
-        sort(begin(v),end(v));
-        int ans=0;
-        for(int i=0;i<n;i++)
+        if(n%6==0 || n%6==2 || n%6==4)
         {
-            int val=v[i];
-            if(m[val]!=0)
+            if(n%6==0)
             {
-                ans++;
-                while(m[val]>0)
-                {
-                    m[val]--;
-                    val++;
-                }
+                ans2=n/6;
+            }
+            else if(n%6==2)
+            {
+               ans2=n/6;
+               ans2++;
+            }
+            else if(n%6==4)
+            {
+                ans2=n/6;
+                ans2++;
             }
         }
-        cout<<ans<<endl;
+        if(ans1>0 && ans2>0)
+        {
+            cout<<ans2<<' '<<ans1<<endl;
+        }
+        else if(ans1>0 && ans2<0)
+        {
+            cout<<ans1<<' '<<ans1<<endl;
+        }
+        else if(ans1<0 && ans2>0)
+        {
+            cout<<ans2<<' '<<ans2<<endl;
+        }
+        else{
+            cout<<"-1"<<endl;
+        }
     }
 }
