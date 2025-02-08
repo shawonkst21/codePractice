@@ -42,49 +42,27 @@ int32_t main() {
         int n;
         cin>>n;
         vi v(n);
-        map<int,vector<int>>mp;
+        input(v);
+        map<int,int>m;
+        for(auto i:v)
+        {
+            m[i]++;
+        }
+        sort(begin(v),end(v));
+        int ans=0;
         for(int i=0;i<n;i++)
         {
-            cin>>v[i];
-            mp[v[i]].pb(i);
-        }
-        vector<vector<int>>v1;
-        for(auto i:mp)
-        {
-            v1.pb(i.second);
-        }
-        sort(begin(v1),end(v1));
-        int q;
-        cin>>q;
-        while(q--)
-        {
-            string s;
-            cin>>s;
-            if(s.size()!=n)
+            int val=v[i];
+            if(m[val]!=0)
             {
-                no;
-                continue;
-            }
-            else{
-                map<char,vector<int>>m2;
-                for(int i=0;i<n;i++)
+                ans++;
+                while(m[val]>0)
                 {
-                    m2[s[i]].pb(i);
-                }
-                vector<vector<int>>v2;
-                for(auto i:m2)
-                {
-                    v2.pb(i.second);
-                }
-                sort(begin(v2),end(v2));
-                if(v1==v2)
-                {
-                    yes;
-                }
-                else{
-                    no;
+                    m[val]--;
+                    val++;
                 }
             }
         }
+        cout<<ans<<endl;
     }
 }
