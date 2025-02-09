@@ -39,44 +39,40 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-        int n;
-        cin>>n;
-        int ans1=-1,ans2=-1;
-        if(n%4==0 || n%4==2)
+        int n,m;
+        cin>>n>>m;
+        vi a(n),b(m);
+        input(a);
+        input(b);
+        sort(rbegin(b),rend(b));
+        int mx1,mx2;
+         mx1=b[0];
+        if(m>1)
         {
-            ans1=n/4;
+             mx2=b[1];
         }
-        if(n%6==0 || n%6==2 || n%6==4)
+        else
         {
-            if(n%6==0)
-            {
-                ans2=n/6;
-            }
-            else if(n%6==2)
-            {
-               ans2=n/6;
-               ans2++;
-            }
-            else if(n%6==4)
-            {
-                ans2=n/6;
-                ans2++;
-            }
+            mx2=mx1;
         }
-        if(ans1>0 && ans2>0)
+         
+
+        for(int i=0;i<n;i++)
         {
-            cout<<ans2<<' '<<ans1<<endl;
+           int x=mx2-a[i];
+           a[i]=min(a[i],x);
+           if(i>0 && a[i]<a[i-1])
+           {
+             int y=mx1-a[i];
+             a[i]=max(y,a[i]);
+           }
         }
-        else if(ans1>0 && ans2<0)
+        if(is_sorted(rbegin(a),rend(a)))
         {
-            cout<<ans1<<' '<<ans1<<endl;
-        }
-        else if(ans1<0 && ans2>0)
-        {
-            cout<<ans2<<' '<<ans2<<endl;
+            yes;
         }
         else{
-            cout<<"-1"<<endl;
+            no;
         }
     }
 }
