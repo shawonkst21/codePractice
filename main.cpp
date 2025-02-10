@@ -35,44 +35,42 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-
+int solve(vector<int>&b,int val)
+{
+    auto it=lower_bound(begin(b),end(b),val);
+    return (it!=b.end())?*it:-1;
+}
 int32_t main() {
     faster();
     testCase{
         int n,m;
         cin>>n>>m;
-        vi a(n),b(m);
-        input(a);
+        vi v(n),b(m);
+        input(v);
         input(b);
-        sort(rbegin(b),rend(b));
-        int mx1,mx2;
-         mx1=b[0];
-        if(m>1)
-        {
-             mx2=b[1];
-        }
-        else
-        {
-            mx2=mx1;
-        }
-         
-
+        sort(begin(b),end(b));
+        int prv=LLONG_MIN;
+        string ans="YES";
         for(int i=0;i<n;i++)
         {
-           int x=mx2-a[i];
-           a[i]=min(a[i],x);
-           if(i>0 && a[i]<a[i-1])
-           {
-             int y=mx1-a[i];
-             a[i]=max(y,a[i]);
-           }
+            int val=v[i]+prv;
+            int x= solve(b,val);
+            if(x!=-1)
+            {
+                if(v[i]<prv)
+                {
+                    v[i]=x-v[i];
+                }
+                else {
+                    v[i]=min(v[i],x-v[i]);
+                }
+            }
+            if(v[i]<prv)
+            {
+               ans="NO";
+            }
+            prv=v[i];
         }
-        if(is_sorted(rbegin(a),rend(a)))
-        {
-            yes;
-        }
-        else{
-            no;
-        }
+        cout<<ans<<endl;
     }
 }
