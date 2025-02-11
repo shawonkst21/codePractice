@@ -15,6 +15,7 @@ int dy[] = {-1, 1, 0, 0};
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
+
 //priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
@@ -35,42 +36,37 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-int solve(vector<int>&b,int val)
-{
-    auto it=lower_bound(begin(b),end(b),val);
-    return (it!=b.end())?*it:-1;
-}
+
 int32_t main() {
     faster();
     testCase{
-        int n,m;
-        cin>>n>>m;
-        vi v(n),b(m);
+        int n;
+        cin>>n;
+        vi v(n);
         input(v);
-        input(b);
-        sort(begin(b),end(b));
-        int prv=LLONG_MIN;
-        string ans="YES";
-        for(int i=0;i<n;i++)
+        map<int,int>m;
+        for(auto i:v)
         {
-            int val=v[i]+prv;
-            int x= solve(b,val);
-            if(x!=-1)
+            m[i]++;
+        }
+        sort(begin(v),end(v));
+        int mn=v[0];
+        int mx=v[n-1];
+        for(int i=mn;i<=mx;i++)
+        {
+            if(m[i]>2)
             {
-                if(v[i]<prv)
-                {
-                    v[i]=x-v[i];
-                }
-                else {
-                    v[i]=min(v[i],x-v[i]);
-                }
+                m[i+1]+=m[i]-2;
+                m[i]-=m[i]-2;
             }
-            if(v[i]<prv)
-            {
-               ans="NO";
-            }
-            prv=v[i];
+        }
+        string ans="YES";
+        for(auto i:m)
+        {
+           cout<<i.first<<' '<<i.second<<endl;
         }
         cout<<ans<<endl;
+        
+
     }
 }
