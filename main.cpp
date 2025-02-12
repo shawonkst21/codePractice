@@ -15,7 +15,6 @@ int dy[] = {-1, 1, 0, 0};
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
-
 //priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
@@ -36,37 +35,46 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-
+bool check(int n)
+{
+    while(n)
+    {
+        if(n%10==7)
+        {
+            return true;
+        }
+        n/=10;
+    }
+    return false;
+}
+vi v={9,99,999,9999,99999,999999,9999999,99999999,999999999};
 int32_t main() {
     faster();
     testCase{
         int n;
         cin>>n;
-        vi v(n);
-        input(v);
-        map<int,int>m;
-        for(auto i:v)
+        if(check(n))
         {
-            m[i]++;
+            cout<<0<<endl;
         }
-        sort(begin(v),end(v));
-        int mn=v[0];
-        int mx=v[n-1];
-        for(int i=mn;i<=mx;i++)
-        {
-            if(m[i]>2)
+        else{
+            int ans=INT_MAX;
+            for(auto i:v)
             {
-                m[i+1]+=m[i]-2;
-                m[i]-=m[i]-2;
+                int temp=n;
+                int cnt=0;
+                bool f=false;
+                while(f==false)
+                {
+                    temp+=i;
+                    cnt++;
+                    f=check(temp);
+                }
+                ans=min(ans,cnt);
             }
+                            cout<<ans<<endl;
+
         }
-        string ans="YES";
-        for(auto i:m)
-        {
-           cout<<i.first<<' '<<i.second<<endl;
-        }
-        cout<<ans<<endl;
-        
 
     }
 }
