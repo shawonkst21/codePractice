@@ -8,14 +8,11 @@ using namespace std;
 const int N = 1e5 + 10;
 int dx[] = {0, 0, -1, 1};
 int dy[] = {-1, 1, 0, 0};
-// int dx2[]={0,0,-1,1,1,1,-1,-1};
-// int dy2[]={-1,1,0,0,1,-1,1,-1};
 #define vi vector<int>
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
-//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
     ios_base::sync_with_stdio(false);
@@ -35,46 +32,79 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-bool check(int n)
-{
-    while(n)
-    {
-        if(n%10==7)
-        {
-            return true;
-        }
-        n/=10;
-    }
-    return false;
-}
-vi v={9,99,999,9999,99999,999999,9999999,99999999,999999999};
+
 int32_t main() {
     faster();
-    testCase{
-        int n;
-        cin>>n;
-        if(check(n))
+    testCase {
+        int n, m;
+        cin >> n >> m;
+        vi a(n), b(m);
+        input(a);
+        input(b);
+        if(m==1)
         {
-            cout<<0<<endl;
+            for(int i=0;i<n;i++)
+            {
+                a[i]=min(a[i],b[0]);
+            }
+            output(a);
         }
         else{
-            int ans=INT_MAX;
-            for(auto i:v)
-            {
-                int temp=n;
-                int cnt=0;
-                bool f=false;
-                while(f==false)
-                {
-                    temp+=i;
-                    cnt++;
-                    f=check(temp);
-                }
-                ans=min(ans,cnt);
-            }
-                            cout<<ans<<endl;
 
+        int minIdx = 0;
+        for (int i = 1; i < m; i++) {
+            if (b[i] < b[minIdx]) {
+                minIdx = i;
+            }
         }
+
+     
+        vi minCycle;
+        for (int i = 0; i < m; i++) {
+            minCycle.push_back(b[(minIdx + i) % m]);
+        }
+
+        bool ok = false;
+        for (int i = 0; i <= n - m; i++) {
+           if(a[i]>minCycle[0])
+           {
+            ok=true;
+             for(int j=i;j<=n-m;j++)
+             {
+                a[j]=minCycle[0];
+             }
+             for(int j=1;j<m;j++)
+             {
+                a[n+j-m]=minCycle[j];
+             }
+           }
+        }
+        if(ok)
+        {
+            output(a);
+        }
+        else{
+            vi a1,a2;
+            for(auto i:a)
+            {
+                a1.pb(i);
+            }
+            for(int i=0;i<n-m;i++)
+            {
+                a2.pb(a[i]);
+            }
+            for(int i=0;i<m;i++)
+            {
+                a2.pb(minCycle[i]);
+            }
+            auto ans=min(a1,a2);
+            output(ans);
+        }
+
+       
+       
+        
+    }
 
     }
 }
