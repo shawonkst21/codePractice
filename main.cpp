@@ -8,11 +8,14 @@ using namespace std;
 const int N = 1e5 + 10;
 int dx[] = {0, 0, -1, 1};
 int dy[] = {-1, 1, 0, 0};
+// int dx2[]={0,0,-1,1,1,1,-1,-1};
+// int dy2[]={-1,1,0,0,1,-1,1,-1};
 #define vi vector<int>
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
+//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
     ios_base::sync_with_stdio(false);
@@ -35,76 +38,26 @@ void faster() {
 
 int32_t main() {
     faster();
-    testCase {
-        int n, m;
-        cin >> n >> m;
-        vi a(n), b(m);
-        input(a);
-        input(b);
-        if(m==1)
-        {
-            for(int i=0;i<n;i++)
-            {
-                a[i]=min(a[i],b[0]);
-            }
-            output(a);
-        }
-        else{
-
-        int minIdx = 0;
-        for (int i = 1; i < m; i++) {
-            if (b[i] < b[minIdx]) {
-                minIdx = i;
-            }
-        }
-
-     
-        vi minCycle;
-        for (int i = 0; i < m; i++) {
-            minCycle.push_back(b[(minIdx + i) % m]);
-        }
-
-        bool ok = false;
-        for (int i = 0; i <= n - m; i++) {
-           if(a[i]>minCycle[0])
-           {
-            ok=true;
-             for(int j=i;j<=n-m;j++)
-             {
-                a[j]=minCycle[0];
-             }
-             for(int j=1;j<m;j++)
-             {
-                a[n+j-m]=minCycle[j];
-             }
-           }
-        }
-        if(ok)
-        {
-            output(a);
-        }
-        else{
-            vi a1,a2;
-            for(auto i:a)
-            {
-                a1.pb(i);
-            }
-            for(int i=0;i<n-m;i++)
-            {
-                a2.pb(a[i]);
-            }
-            for(int i=0;i<m;i++)
-            {
-                a2.pb(minCycle[i]);
-            }
-            auto ans=min(a1,a2);
-            output(ans);
-        }
-
-       
-       
-        
+    int k2,k3,k5,k6;
+    cin>>k2>>k3>>k5>>k6;
+    vector<int>ans;
+    while(k2!=0 && k5!=0 && k6!=0)
+    {
+        ans.push_back(256);
+        k2--;
+        k5--;
+        k6--;
     }
-
+    while(k3!=0 && k2!=0)
+    {
+        ans.pb(32);
+        k3--;
+        k2--;
     }
+     int sum=0;
+    for(auto i:ans)
+    {
+        sum+=i;
+    }
+    cout<<sum<<endl;
 }
