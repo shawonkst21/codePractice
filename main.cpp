@@ -12,6 +12,8 @@ int dy[] = {-1, 1, 0, 0};
 // int dy2[]={-1,1,0,0,1,-1,1,-1};
 #define vi vector<int>
 #define vp vector<pair<int, int>>
+
+
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
