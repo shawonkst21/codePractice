@@ -12,8 +12,6 @@ int dy[] = {-1, 1, 0, 0};
 // int dy2[]={-1,1,0,0,1,-1,1,-1};
 #define vi vector<int>
 #define vp vector<pair<int, int>>
-
-
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
@@ -40,26 +38,25 @@ void faster() {
 
 int32_t main() {
     faster();
-    int k2,k3,k5,k6;
-    cin>>k2>>k3>>k5>>k6;
-    vector<int>ans;
-    while(k2!=0 && k5!=0 && k6!=0)
-    {
-        ans.push_back(256);
-        k2--;
-        k5--;
-        k6--;
+    testCase{
+        int n;
+        cin>>n;
+        bool ok=false;
+        for(int i=0;i<n;i++)
+        {
+            int x;
+            cin>>x;
+            if(x<=i*2 || x<=(n-i-1)*2)
+            {
+                ok=true;
+            }
+        }
+        if(ok)
+        {
+            no;
+        }
+        else{
+            yes;
+        }
     }
-    while(k3!=0 && k2!=0)
-    {
-        ans.pb(32);
-        k3--;
-        k2--;
-    }
-     int sum=0;
-    for(auto i:ans)
-    {
-        sum+=i;
-    }
-    cout<<sum<<endl;
 }
