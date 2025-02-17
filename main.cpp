@@ -41,22 +41,38 @@ int32_t main() {
     testCase{
         int n;
         cin>>n;
-        bool ok=false;
-        for(int i=0;i<n;i++)
+        string s;
+        cin>>s;
+        stack<char>temp;
+        temp.push(s[0]);
+        for(int i=1;i<n;i++)
         {
-            int x;
-            cin>>x;
-            if(x<=i*2 || x<=(n-i-1)*2)
-            {
-                ok=true;
-            }
+              if(temp.top()!=s[i])
+              {
+                temp.push(s[i]);
+              }
         }
-        if(ok)
+        int cnt=0;
+        bool one=false,zero=false;
+        while(!temp.empty())
         {
-            no;
+            //cout<<temp.size()<<endl;
+             if(temp.top()=='1' && zero==false)
+             {
+                cnt++;
+             }
+             else if(temp.top()=='0')
+             {
+                zero=true;
+             }
+             else if(temp.top()=='1' && zero==true)
+             {
+                cnt+=2;
+                zero=false;
+             }
+             temp.pop();
         }
-        else{
-            yes;
-        }
+        cout<<cnt<<endl;
+
     }
 }
