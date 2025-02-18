@@ -5,74 +5,70 @@ using namespace std;
 #define no cout << "NO" << endl
 #define endl "\n"
 #define pb push_back
-const int N = 1e5 + 10;
-int dx[] = {0, 0, -1, 1};
-int dy[] = {-1, 1, 0, 0};
-// int dx2[]={0,0,-1,1,1,1,-1,-1};
-// int dy2[]={-1,1,0,0,1,-1,1,-1};
-#define vi vector<int>
-#define vp vector<pair<int, int>>
-#define mii map<int, int>
-#define setBits(a) (int)__builtin_popcountll(a)
-#define mod 1000000007
-//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
+#define MOD 998244353
 
 void faster() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 }
 
-#define input(a)      \
-    for (auto &x : a) \
-        cin >> x
-#define output(a)             \
-    {                         \
-        for (auto &x : a)     \
-            cout << x << ' '; \
-        cout << endl;         \
+#define input(a) for (auto &x : a) cin >> x
+#define output(a) { for (auto &x : a) cout << x << ' '; cout << endl; }
+#define testCase int t; cin >> t; while (t--)
+
+int power(int base, int exp, int mod) {
+    int result = 1;
+    while (exp > 0) {
+        if (exp % 2) result = (result * base) % mod;
+        base = (base * base) % mod;
+        exp /= 2;
     }
-#define testCase \
-    int t;       \
-    cin >> t;    \
-    while (t--)
+    return result;
+}
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    vector<int> pos_1, pos_2, pos_3;
+
+   
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        if (a[i] == 1) pos_1.push_back(i);
+        else if (a[i] == 2) pos_2.push_back(i);
+        else pos_3.push_back(i);
+    }
+
+    if (pos_1.empty() || pos_3.empty()) {
+        cout << "0\n";
+        return;
+    }
+
+    int total_count = 0;
+
+    
+    for (int i : pos_1) {
+        for (int j : pos_3) {
+            if (i < j) {
+             
+                int num_twos = upper_bound(pos_2.begin(), pos_2.end(), j - 1) -
+                               lower_bound(pos_2.begin(), pos_2.end(), i + 1);
+
+            
+                if (num_twos == 0) continue;
+
+                total_count = (total_count + (power(2, num_twos, MOD) - 1 + MOD) % MOD) % MOD;
+            }
+        }
+    }
+
+    cout << total_count << "\n";
+}
 
 int32_t main() {
     faster();
-    testCase{
-        int n;
-        cin>>n;
-        string s;
-        cin>>s;
-        stack<char>temp;
-        temp.push(s[0]);
-        for(int i=1;i<n;i++)
-        {
-              if(temp.top()!=s[i])
-              {
-                temp.push(s[i]);
-              }
-        }
-        int cnt=0;
-        bool one=false,zero=false;
-        while(!temp.empty())
-        {
-            //cout<<temp.size()<<endl;
-             if(temp.top()=='1' && zero==false)
-             {
-                cnt++;
-             }
-             else if(temp.top()=='0')
-             {
-                zero=true;
-             }
-             else if(temp.top()=='1' && zero==true)
-             {
-                cnt+=2;
-                zero=false;
-             }
-             temp.pop();
-        }
-        cout<<cnt<<endl;
-
+    testCase {
+        solve();
     }
 }
