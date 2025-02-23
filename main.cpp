@@ -38,15 +38,26 @@ void faster() {
 
 int32_t main() {
     faster();
-map<string,int>m={{"Tetrahedron",4},{"Cube",6},{"Octahedron",8},{"Dodecahedron",12},{"Icosahedron",20}};
-     int n;
-     cin>>n;
-     int sum=0;
-     for(int i=0;i<n;i++)
-     {
-        string s;
-        cin>>s;
-        sum+=m[s];
-     }
-     cout<<sum<<endl;
+    testCase{
+        int n;
+        cin>>n;
+        vi v(n);
+        input(v);
+        int ans=0;
+        vector<bool>check(n,false);
+        for(int i=31;i>=0;i--)
+        {
+          int cnt=0;
+          for(int j=0;j<n;j++)
+          {
+              if(((1<<i)&v[j]) && check[j]==false)
+              {
+                cnt++;
+                check[j]=true;
+              }
+          }
+          ans+=cnt*(cnt-1)/2;
+        }
+        cout<<ans<<endl;
+    }
 }
