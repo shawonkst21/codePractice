@@ -38,26 +38,62 @@ void faster() {
 
 int32_t main() {
     faster();
-    testCase{
-        int n;
-        cin>>n;
-        vi v(n);
-        input(v);
-        int ans=0;
-        vector<bool>check(n,false);
-        for(int i=31;i>=0;i--)
+    int n,q;
+    cin>>n>>q;
+    vi v(n);
+    input(v);
+    int sum=accumulate(begin(v),end(v),0ll);
+    map<int,int>m;
+    int up=-1;
+    while(q--){
+        int x;
+        cin>>x;
+        if(x==1)
         {
-          int cnt=0;
-          for(int j=0;j<n;j++)
-          {
-              if(((1<<i)&v[j]) && check[j]==false)
-              {
-                cnt++;
-                check[j]=true;
-              }
-          }
-          ans+=cnt*(cnt-1)/2;
+            int i,val;
+            cin>>i>>val;
+                        i--;
+
+            if(up==-1)
+            {
+               if(val>=v[i])
+               {
+                sum+=(val-v[i]);
+               }
+               else{
+                 sum-=(v[i]-val);
+               }
+               v[i]=val;
+               cout<<sum<<endl;
+            }
+            else{
+                int temp;
+               if(m[i]==0)
+               {
+                  temp=up;
+               }
+               else{
+                temp=m[i];
+               }
+               if(val>=temp)
+               {
+                 sum+=val-temp;
+               }
+               else{
+                sum-=(temp-val);
+               }
+               cout<<sum<<endl;
+               m[i]=val;
+            }
         }
-        cout<<ans<<endl;
+        else{
+            int val;
+            cin>>val;
+            cout<<n*val<<endl;
+            sum=n*val;
+            m.clear();
+            up=val;
+
+        }
     }
 }
