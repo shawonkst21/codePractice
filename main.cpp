@@ -8,14 +8,11 @@ using namespace std;
 const int N = 1e5 + 10;
 int dx[] = {0, 0, -1, 1};
 int dy[] = {-1, 1, 0, 0};
-// int dx2[]={0,0,-1,1,1,1,-1,-1};
-// int dy2[]={-1,1,0,0,1,-1,1,-1};
 #define vi vector<int>
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
-//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
     ios_base::sync_with_stdio(false);
@@ -38,62 +35,59 @@ void faster() {
 
 int32_t main() {
     faster();
-    int n,q;
-    cin>>n>>q;
-    vi v(n);
-    input(v);
-    int sum=accumulate(begin(v),end(v),0ll);
-    map<int,int>m;
-    int up=-1;
-    while(q--){
-        int x;
-        cin>>x;
-        if(x==1)
+    testCase {
+        int n, x, k;
+        cin >> n >> x >> k;
+        vi v(n);
+        string s;
+        cin >> s;
+
+        for (int i = 0; i < n; i++) {
+            v[i] = (s[i] == 'L') ? -1 : 1;
+        }
+
+        int cnt = 0;
+        bool ok = false;
+
+        if (x == 0) { 
+            ok = true;
+        }
+
+        for (int i = 0; i < n; i++) {
+            x += v[i];
+           // cout<<x<<endl;
+            cnt++;
+            if (x == 0) {
+                ok = true;
+                break;
+            }
+        }
+         
+        int ans=0;
+        if(ok)
         {
-            int i,val;
-            cin>>i>>val;
-                        i--;
-
-            if(up==-1)
-            {
-               if(val>=v[i])
-               {
-                sum+=(val-v[i]);
-               }
-               else{
-                 sum-=(v[i]-val);
-               }
-               v[i]=val;
-               cout<<sum<<endl;
+         ans++;
+        if (k > n) {
+            vector<int> prefix(n);
+            prefix[0] = v[0];
+            for (int i = 1; i < n; i++) {
+                prefix[i] = prefix[i - 1] + v[i];
             }
-            else{
-                int temp;
-               if(m[i]==0)
-               {
-                  temp=up;
-               }
-               else{
-                temp=m[i];
-               }
-               if(val>=temp)
-               {
-                 sum+=val-temp;
-               }
-               else{
-                sum-=(temp-val);
-               }
-               cout<<sum<<endl;
-               m[i]=val;
+
+            int temp1 = -1;
+            for (int i = 0; i < n; i++) {
+                if (prefix[i] == 0) {
+                    temp1 = i + 1;
+                    break;
+                }
+            }
+
+            if (temp1 != -1  && k >= cnt) { 
+                k -= cnt;
+                ans += (k / temp1);
             }
         }
-        else{
-            int val;
-            cin>>val;
-            cout<<n*val<<endl;
-            sum=n*val;
-            m.clear();
-            up=val;
-
-        }
+    }
+      cout << ans << endl;
     }
 }
