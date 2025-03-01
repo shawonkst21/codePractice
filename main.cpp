@@ -67,7 +67,7 @@ int32_t main() {
         if(ok)
         {
          ans++;
-        if (k > n) {
+        if (k >= n) {
             vector<int> prefix(n);
             prefix[0] = v[0];
             for (int i = 1; i < n; i++) {
