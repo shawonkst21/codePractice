@@ -8,11 +8,14 @@ using namespace std;
 const int N = 1e5 + 10;
 int dx[] = {0, 0, -1, 1};
 int dy[] = {-1, 1, 0, 0};
+// int dx2[]={0,0,-1,1,1,1,-1,-1};
+// int dy2[]={-1,1,0,0,1,-1,1,-1};
 #define vi vector<int>
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
+//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
     ios_base::sync_with_stdio(false);
@@ -35,59 +38,42 @@ void faster() {
 
 int32_t main() {
     faster();
-    testCase {
-        int n, x, k;
-        cin >> n >> x >> k;
-        vi v(n);
+    testCase{
+        int n;
+        cin>>n;
         string s;
-        cin >> s;
-
-        for (int i = 0; i < n; i++) {
-            v[i] = (s[i] == 'L') ? -1 : 1;
-        }
-
-        int cnt = 0;
-        bool ok = false;
-
-        if (x == 0) { 
-            ok = true;
-        }
-
-        for (int i = 0; i < n; i++) {
-            x += v[i];
-           // cout<<x<<endl;
-            cnt++;
-            if (x == 0) {
-                ok = true;
-                break;
-            }
-        }
-         
-        int ans=0;
-        if(ok)
+        cin>>s;
+        int ans=INT_MAX;
+        for(int i=0;i<26;i++)
         {
-         ans++;
-        if (k >= n) {
-            vector<int> prefix(n);
-            prefix[0] = v[0];
-            for (int i = 1; i < n; i++) {
-                prefix[i] = prefix[i - 1] + v[i];
-            }
-
-            int temp1 = -1;
-            for (int i = 0; i < n; i++) {
-                if (prefix[i] == 0) {
-                    temp1 = i + 1;
+            int l=0,r=n-1,cnt=0;
+            while(l<=r)
+            {
+                if(s[l]==s[r])
+                {
+                    l++,r--;
+                }
+                else if(s[l]==char('a'+i))
+                {
+                    l++;
+                    cnt++;
+                }
+                else if(s[r]==char('a'+i))
+                {
+                    r--;
+                    cnt++;
+                }
+                else{
+                    cnt=INT_MAX;
                     break;
                 }
-            }
 
-            if (temp1 != -1  && k >= cnt) { 
-                k -= cnt;
-                ans += (k / temp1);
             }
+                ans=min(cnt,ans); 
+
+          
         }
-    }
-      cout << ans << endl;
+        
+      cout << (ans == INT_MAX ? -1 : ans) << endl;
     }
 }
