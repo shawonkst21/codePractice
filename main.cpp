@@ -1,79 +1,65 @@
-#include <bits/stdc++.h>
-using namespace std;
-#define int long long
-#define yes cout << "YES" << endl
-#define no cout << "NO" << endl
-#define endl "\n"
-#define pb push_back
-const int N = 1e5 + 10;
-int dx[] = {0, 0, -1, 1};
-int dy[] = {-1, 1, 0, 0};
-// int dx2[]={0,0,-1,1,1,1,-1,-1};
-// int dy2[]={-1,1,0,0,1,-1,1,-1};
-#define vi vector<int>
-#define vp vector<pair<int, int>>
-#define mii map<int, int>
-#define setBits(a) (int)__builtin_popcountll(a)
-#define mod 1000000007
-//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
+#include <iostream>
+#include <vector>
 
-void faster() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+using namespace std;
+
+int N;
+vector<vector<string>> result;
+
+bool isValid(int row, int col, vector<string>& board) {
+    for (int i = row - 1; i >= 0; i--) {
+        if (board[i][col] == 'Q') {
+            return false;
+        }
+    }
+    for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+        if (board[i][j] == 'Q') {
+            return false;
+        }
+    }
+    for (int i = row - 1, j = col + 1; i >= 0 && j < N; i--, j++) {
+        if (board[i][j] == 'Q') {
+            return false;
+        }
+    }
+    return true;
 }
 
-#define input(a)      \
-    for (auto &x : a) \
-        cin >> x
-#define output(a)             \
-    {                         \
-        for (auto &x : a)     \
-            cout << x << ' '; \
-        cout << endl;         \
+void solve(vector<string>& board, int row) {
+    if (row == N) {
+        result.push_back(board);
+        return;
     }
-#define testCase \
-    int t;       \
-    cin >> t;    \
-    while (t--)
-
-int32_t main() {
-    faster();
-    testCase{
-        int n;
-        cin>>n;
-        string s;
-        cin>>s;
-        int ans=INT_MAX;
-        for(int i=0;i<26;i++)
-        {
-            int l=0,r=n-1,cnt=0;
-            while(l<=r)
-            {
-                if(s[l]==s[r])
-                {
-                    l++,r--;
-                }
-                else if(s[l]==char('a'+i))
-                {
-                    l++;
-                    cnt++;
-                }
-                else if(s[r]==char('a'+i))
-                {
-                    r--;
-                    cnt++;
-                }
-                else{
-                    cnt=INT_MAX;
-                    break;
-                }
-
-            }
-                ans=min(cnt,ans); 
-
-          
+    for (int col = 0; col < N; col++) {
+        if (isValid(row, col, board)) {
+            board[row][col] = 'Q';
+            solve(board, row + 1);
+            board[row][col] = '.';
         }
-        
-      cout << (ans == INT_MAX ? -1 : ans) << endl;
     }
+}
+
+void solveNQueens(int n) {
+    N = n;
+    vector<string> board(n, string(n, '.'));
+    solve(board, 0);
+}
+
+void printSolutions() {
+    for (const auto& solution : result) {
+        for (const auto& row : solution) {
+            cout << row << endl;
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    int n;
+    cout << "Enter the value of N: ";
+    cin >> n;
+    solveNQueens(n);
+    cout << "Possible solutions:\n";
+    printSolutions();
+    return 0;
 }
