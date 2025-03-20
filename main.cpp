@@ -15,6 +15,7 @@ int dy[] = {-1, 1, 0, 0};
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
 #define mod 1000000007
+//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
     ios_base::sync_with_stdio(false);
@@ -38,26 +39,34 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-        int n;
-        cin>>n;
-        vi v(n);
+        int n,m;
+        cin>>n>>m;
+        vi v(m);
         input(v);
-        priority_queue<int,vector<int>,greater<int>>p;
-
-        for(auto i:v)
+        for(int i=0;i<m;i++)
         {
-            p.push(i);
+            v[i]=min(v[i],n-1);
         }
-        while(p.size()!=1)
+        int ptr=m-1;
+        sort(begin(v),end(v));
+        int ans=0;
+        int sum=0;
+        for(int i=0;i<m;i++)
         {
-            int x=p.top();
-            p.pop();
-            int y=p.top();
-            p.pop();
-            p.push(x+y-1);
+            while(ptr>=0 && v[ptr]+v[i]>=n)
+            {
+                sum+=v[ptr];
+                ptr--;
+            }
+            ans+=sum+(m-ptr-1)*(v[i]-n+1);
         }
-        cout<<p.top()<<endl;
-
-
+        for(int i=0;i<m;i++)
+        {
+            if(2*v[i]>=n)
+            {
+                ans-=2*v[i]-n+1;
+            }
+        }
+        cout<<ans<<endl;
     }
 }
