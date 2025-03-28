@@ -1,76 +1,82 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
+#define yes cout << "YES" << endl
+#define no cout << "NO" << endl
 #define endl "\n"
+#define pb push_back
+const int N = 1e5 + 10;
+int dx[] = {0, 0, -1, 1};
+int dy[] = {-1, 1, 0, 0};
+// int dx2[]={0,0,-1,1,1,1,-1,-1};
+// int dy2[]={-1,1,0,0,1,-1,1,-1};
 #define vi vector<int>
+#define vp vector<pair<int, int>>
+#define mii map<int, int>
+#define setBits(a) (int)__builtin_popcountll(a)
+#define mod 1000000007
+//priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 }
 
-const int N = 1e6 + 10;
-vector<bool> is_prime(N, true);
-
-void sieve() {
-    is_prime[0] = is_prime[1] = false;
-    for (int i = 2; i * i < N; i++) {
-        if (is_prime[i]) {
-            for (int j = i * i; j < N; j += i) {
-                is_prime[j] = false;
-            }
-        }
+#define input(a)      \
+    for (auto &x : a) \
+        cin >> x
+#define output(a)             \
+    {                         \
+        for (auto &x : a)     \
+            cout << x << ' '; \
+        cout << endl;         \
     }
-}
+#define testCase \
+    int t;       \
+    cin >> t;    \
+    while (t--)
 
-// Count numbers ≤ n that are divisible by at least one of the given primes
-int count_divisible_by_any(const vi &primes, int n) {
-    int k = primes.size();
-    int count = 0;
-
-    for (int i = 1; i < (1 << k); i++) { // Iterate over all subsets of primes
-        int product = 1, bits = __builtin_popcount(i);
-
-        for (int j = 0; j < k; j++) {
-            if (i & (1 << j)) {  // If j-th bit is set, include primes[j]
-                if (product > n / primes[j]) {  // Prevent integer overflow
-                    product = n + 1;
-                    break;
-                }
-                product *= primes[j];
-            }
-        }
-
-        if (product > n) continue;
-
-        int divisible_count = n / product;
-        if (bits % 2) count += divisible_count;  // Add if odd subset size
-        else count -= divisible_count;  // Subtract if even subset size
+int extended_gcd(int m,int n,int &p,int &q)
+{
+    if(!n)
+    {
+        p=1;
+        q=0;
+        return m;
     }
-
-    return count;
+    int g=extended_gcd(n,m%n,p,q);
+    int t=p;
+    p=q;
+    q=t-(m/n)*q;
+    return g;
 }
 
 int32_t main() {
     faster();
-    sieve();
-
-    int t;
-    cin >> t;
-    for (int tc = 1; tc <= t; tc++) {
-        int n, k;
-        cin >> n >> k;
-        vi primes(k);
-        for (auto &x : primes) cin >> x;
-
-        int total_composites = 0;
-        for (int i = 2; i <= n; i++) {
-            if (!is_prime[i]) total_composites++;  // Count composite numbers
+      int t;
+    cin>>t;
+    for(int i=1;i<=t;i++)
+    {
+        int a,b,c,p,x,y,ans=0;
+        cin>>a>>b>>c>>p;
+        int g=extended_gcd(a,b,x,y);
+        int da=b/g,db=a/g;
+        
+        for(int k=0;;k++)
+        {
+            int k0=p-k*c;
+            if(k0<0) break;
+            if(k0%g!=0) continue;
+            
+            int X=x*k0/g,Y=y*k0/g;
+        
+            X=(X%da + da)%da;
+            Y=(k0 - X*a)/b;
+            
+            if(Y>=0) ans++;
+            ans+=Y/db;
         }
-
-        int divisible_count = count_divisible_by_any(primes, n);
-        int result = total_composites - divisible_count;
-
-        cout << "Case " << tc << ": " << result << endl;
+        cout<<"Case "<<i<<": "<<ans<<"\n";
     }
+
 }
