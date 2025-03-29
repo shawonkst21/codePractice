@@ -14,7 +14,7 @@ int dy[] = {-1, 1, 0, 0};
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
-#define mod 1000000007
+//#define mod 1000000007
 //priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
@@ -35,48 +35,17 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-
-int extended_gcd(int m,int n,int &p,int &q)
-{
-    if(!n)
-    {
-        p=1;
-        q=0;
-        return m;
-    }
-    int g=extended_gcd(n,m%n,p,q);
-    int t=p;
-    p=q;
-    q=t-(m/n)*q;
-    return g;
-}
-
+int n, ans, d[N];
+const int mod = 998244353;
 int32_t main() {
     faster();
-      int t;
-    cin>>t;
-    for(int i=1;i<=t;i++)
+    cin>>n;
+    ans=n;
+    int u,v;
+    for(int i=0;i<n-1;i++)
     {
-        int a,b,c,p,x,y,ans=0;
-        cin>>a>>b>>c>>p;
-        int g=extended_gcd(a,b,x,y);
-        int da=b/g,db=a/g;
-        
-        for(int k=0;;k++)
-        {
-            int k0=p-k*c;
-            if(k0<0) break;
-            if(k0%g!=0) continue;
-            
-            int X=x*k0/g,Y=y*k0/g;
-        
-            X=(X%da + da)%da;
-            Y=(k0 - X*a)/b;
-            
-            if(Y>=0) ans++;
-            ans+=Y/db;
-        }
-        cout<<"Case "<<i<<": "<<ans<<"\n";
+        cin>>u>>v;
+        ans=ans*(++d[u])%mod*(++d[v])%mod;
     }
-
+    cout<<ans<<endl;
 }
