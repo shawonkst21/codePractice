@@ -14,7 +14,7 @@ int dy[] = {-1, 1, 0, 0};
 #define vp vector<pair<int, int>>
 #define mii map<int, int>
 #define setBits(a) (int)__builtin_popcountll(a)
-//#define mod 1000000007
+#define mod 1000000007
 //priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>p;
 
 void faster() {
@@ -35,17 +35,40 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-int n, ans, d[N];
-const int mod = 998244353;
+
 int32_t main() {
     faster();
-    cin>>n;
-    ans=n;
-    int u,v;
-    for(int i=0;i<n-1;i++)
-    {
-        cin>>u>>v;
-        ans=ans*(++d[u])%mod*(++d[v])%mod;
+    testCase{
+       int n,k,x;
+       cin>>n>>k>>x;
+       vi v(n);
+       input(v);
+       int s=accumulate(begin(v),end(v),0ll);
+       if(x>k*s)
+       {
+        cout<<"0\n";
+         continue;
+       }
+       int xm=x%s;
+       int com=x/s;
+       if(xm==0)
+       {
+         com--;
+         xm=s;
+       }
+
+       int ans=n*k-n*com;
+       int suf=0;
+       for(int i=n-1;i>=0;i--)
+       {
+          suf+=v[i];
+          if(suf>=xm)
+          {
+            break;
+          }
+          ans--;
+       }
+       cout<<ans<<endl;
+
     }
-    cout<<ans<<endl;
 }
