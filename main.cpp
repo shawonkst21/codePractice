@@ -39,36 +39,18 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-       int n,k,x;
-       cin>>n>>k>>x;
-       vi v(n);
-       input(v);
-       int s=accumulate(begin(v),end(v),0ll);
-       if(x>k*s)
-       {
-        cout<<"0\n";
-         continue;
-       }
-       int xm=x%s;
-       int com=x/s;
-       if(xm==0)
-       {
-         com--;
-         xm=s;
-       }
-
-       int ans=n*k-n*com;
-       int suf=0;
-       for(int i=n-1;i>=0;i--)
-       {
-          suf+=v[i];
-          if(suf>=xm)
-          {
-            break;
-          }
-          ans--;
-       }
-       cout<<ans<<endl;
-
+        int n;
+        cin>>n;
+        if(n%2==0)
+        {
+            cout<<"-1"<<endl;
+        }
+        else{
+            cout<<n<<' ';
+            for(int i=2;i<=n;i++)
+            {
+                cout<<i-1<<' ';
+            }cout<<endl;
+        }
     }
 }
