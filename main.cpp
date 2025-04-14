@@ -39,20 +39,13 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-        string s;
-        cin>>s;
-        int x=-1;
-        int cnt=0;
-        for(int i=0;i<s.size();i++)
+        int n,m,l,r;
+        cin>>n>>m>>l>>r;
+        int temp=l;
+        for(int i=1;i<=m;i++)
         {
-            if(s[i]!='0')
-            {
-                x=i+1;
-                cnt++;
-            }
+            temp++;
         }
-        int ans=cnt-1;
-        ans+=s.size()-x;
-        cout<<ans<<endl;
+        cout<<l<<' '<<temp<<endl;
     }
 }
