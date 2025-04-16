@@ -39,13 +39,95 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-        int n,m,l,r;
-        cin>>n>>m>>l>>r;
-        int temp=l;
-        for(int i=1;i<=m;i++)
+        string s1,s2;
+        cin>>s1>>s2;
+        vector<pair<int,char>>temp;
+        vector<pair<int,char>>temp1;
+
+        char ch;
+        int cnt1=0,cnt2=0;
+        for(int i=0;i<s2.size();i++)
         {
-            temp++;
+              if(s2[i]=='L')
+              {
+                 cnt1++;
+                 if(cnt2)
+                 {
+                    temp.pb({cnt2,'R'});
+                 cnt2=0;
+                 }
+              }
+              else{
+                cnt2++;
+                   if(cnt1)
+                   {
+                       temp.pb({cnt1,'L'});
+                cnt1=0;
+                   }
+              }
         }
-        cout<<l<<' '<<temp<<endl;
+        if(cnt1)
+        {
+            temp.pb({cnt1,'L'});
+        }
+        else{
+             temp.pb({cnt2,'R'});
+        }
+
+        cnt1=0,cnt2=0;
+         for(int i=0;i<s1.size();i++)
+        {
+              if(s1[i]=='L')
+              {
+                 cnt1++;
+                 if(cnt2)
+                 {
+                    temp1.pb({cnt2,'R'});
+                 cnt2=0;
+                 }
+              }
+              else{
+                cnt2++;
+                   if(cnt1)
+                   {
+                       temp1.pb({cnt1,'L'});
+                cnt1=0;
+                   }
+              }
+        }
+        if(cnt1)
+        {
+            temp1.pb({cnt1,'L'});
+        }
+        else{
+             temp1.pb({cnt2,'R'});
+        }
+        bool ans=false;
+
+        if(temp.size()==temp1.size())
+        {
+            for(int i=0;i<temp.size();i++)
+            {
+                if(temp[i].second==temp1[i].second && (temp[i].first>=temp1[i].first && temp[i].first<=temp1[i].first*2))
+                {
+                     ans=true;
+                }
+                else{
+                    ans=false;
+                    break;
+                }
+                {
+
+                }
+            }
+        }
+         if(ans)
+         {
+            yes;
+         }
+         else{
+            no;
+         }
+        
     }
 }
