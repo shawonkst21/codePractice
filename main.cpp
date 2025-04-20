@@ -35,19 +35,28 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
-
+int solve(int b,int p,int m)
+{
+    if(p==0)
+    {
+        return 1;
+    }
+    else if(p%2==1)
+    {
+        int a=b%m;
+        int x=(solve(b,p-1,m))%m;
+        return (a*x)%m;
+    }
+    else{
+        int a=(solve(b,p/2,m))%m;
+        return (a*a)%m;
+    }
+}
 int32_t main() {
     faster();
-    testCase{
-        int x,y,a,b;
-        cin>>x>>y>>a>>b;
-        if(2*a<b)
-        {
-            cout<<(x+y)*a<<endl;
-        }
-        else{
-
-            cout<<(max(x,y)-min(x,y))*a+min(x,y)*b<<endl;
-        }
-    }
+    int a,b,m;
+    cin>>a>>b>>m;
+    int x=solve(b,m-2,m);
+    int ans=(a*x)%m;
+    cout<<ans<<endl;
 }
