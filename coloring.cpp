@@ -35,19 +35,59 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
+bool isvalid(int node,vector<int>g[],vector<int>&color,int col)
+{
+	for(auto i:g[node])
+	{
+		if(color[i]==col)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+bool solve(int node,vector<int>g[],vector<int>&color,int n,int m)
+{
+	 if(node==n)
+	 {
+	 	return true;
+	 }
 
+	 for(int col=1;col<=m;col++)
+	 {
+	 	 if(isvalid(node,g,color,col))
+	 	 {
+                color[node]=col;
+                if(solve(node+1,g,color,n,m)==true)
+                	return true;
+                color[node]=0;
+	 	 }
+	 }
+	 return false;
+}
 int32_t main() {
     faster();
-    testCase{
-        int num;
-        cin>>num;
-        int x=sqrt(num);
-        if(x*x==num)
-        {
-            cout<<(1)<<" "<<x-1<<endl;
-        }
-        else{
-            cout<<"-1"<<endl;
-        }
+    int n,m;
+    cin>>n>>m;
+    vector<int>g[n];
+    for(int i=0;i<m;i++)
+    {
+    	int u,v;
+    	cin>>u>>v;
+    	g[u].push_back(v);
+    	g[v].push_back(u);
     }
+    int col=1;
+    int ans=0;
+    while(true)
+    {
+    	 vector<int>color(n,0);
+         if(solve(0,g,color,n,col))
+         {
+            cout<<col<<endl;
+            break;
+         }
+         col++;
+    }
+   
 }

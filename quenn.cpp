@@ -5,7 +5,7 @@ using namespace std;
 #define no cout << "NO" << endl
 #define endl "\n"
 #define pb push_back
-const int N = 1e5 + 10;
+//const int N = 1e5 + 10;
 int dx[] = {0, 0, -1, 1};
 int dy[] = {-1, 1, 0, 0};
 // int dx2[]={0,0,-1,1,1,1,-1,-1};
@@ -35,19 +35,65 @@ void faster() {
     int t;       \
     cin >> t;    \
     while (t--)
+int N;
+vector<vector<string>>result;
+bool isvalid(int row,int col,vector<string>&board)
+{
+	for(int i=row-1;i>=0;i--)
+	{
+		if(board[i][col]=='Q')
+		{
+			return false;
+		}
 
+	}
+	for(int i=row-1,j=col-1;i>=0 && j>=0;i--,j--)
+	{
+		if(board[i][j]=='Q')
+		{
+			return false;
+		}
+	}
+	for(int i=row-1,j=col+1;i>=0 && j<N;i--,j++)
+	{
+		if(board[i][j]=='Q')
+		{
+			return false;
+		}
+	}
+    return true;
+}
+void solve(int row,vector<string>&board)
+{
+	 if(row>=N)
+	 {
+	 	result.push_back(board);
+	 	return;
+	 }
+
+	 for(int col=0;col<N;col++)
+	 {
+	 	  if(isvalid(row,col,board))
+	 	  {
+              board[row][col]='Q';
+              solve(row+1,board);
+              board[row][col]='.';
+	 	  }
+	 }
+}
 int32_t main() {
     faster();
-    testCase{
-        int num;
-        cin>>num;
-        int x=sqrt(num);
-        if(x*x==num)
-        {
-            cout<<(1)<<" "<<x-1<<endl;
-        }
-        else{
-            cout<<"-1"<<endl;
-        }
+    int n;
+    cin>>n;
+    N=n;
+    vector<string>board(n,string(n,'.'));
+    solve(0,board);
+    for(auto &sol:result)
+    {
+    	for(auto &i:sol)
+    	{
+    		cout<<i<<endl;
+    	}
+    	cout<<endl;
     }
 }
