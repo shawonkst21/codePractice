@@ -39,43 +39,14 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-      int n,k;
-      cin>>n>>k;
-      vi v(n);
-      input(v);
-      vi count(n);
-      int temp=0;
-      for(int i=n-1;i>=0;i--)
-      {
-          if(v[i]==0)
-          {
-            temp++;
-            count[i]=temp;
-          }
-          else{
-            temp=0;
-          }
-      }
-      int ans=0;
-      int i=0;
-      while(i<n)
-      {
-          if(count[i]==0)
-          {
-            i++;
-          }
-          else{
-              if(count[i]>=k)
-              {
-                  ans++;
-                  i=i+k+1;
-              }
-              else{
-                i++;
-              }
-          }
-      }
-      cout<<ans<<endl;
-
+        int n,m;
+        cin>>n>>m;
+        if((min(n,m)==1 )||(n==m && n==2))
+        {
+          no;
+        }
+        else{
+          yes;
+        }
     }
 }
