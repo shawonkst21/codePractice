@@ -39,14 +39,33 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-        int n,m;
-        cin>>n>>m;
-        if((min(n,m)==1 )||(n==m && n==2))
-        {
-          no;
+        int a,b,c,d;
+        cin>>a>>b>>c>>d;
+
+        int mx1=max(a,b);
+        int mi1=min(a,b);
+
+        int mx2=max(c-a,d-b);
+        int mi2=min(c-a,d-b);
+
+        int cnt1=(mx1/2);
+        if(mx1%2==0 && mx1>0){
+            cnt1--;
+        }
+
+         int cnt2=(mx2/2);
+        if(mx2%2==0 && mx2>0){
+            cnt2--;
+        }
+
+        if(cnt1>mi1 || cnt2>mi2){
+            no;
         }
         else{
-          yes;
+            yes;
         }
+        
+
+
     }
 }
