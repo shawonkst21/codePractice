@@ -38,34 +38,41 @@ void faster() {
 
 int32_t main() {
     faster();
-    testCase{
-        int a,b,c,d;
-        cin>>a>>b>>c>>d;
+    string s;
+    cin>>s;
 
-        int mx1=max(a,b);
-        int mi1=min(a,b);
+    int one=0;
+    int four=0;
+    string ans="YES";
 
-        int mx2=max(c-a,d-b);
-        int mi2=min(c-a,d-b);
-
-        int cnt1=(mx1/2);
-        if(mx1%2==0 && mx1>0){
-            cnt1--;
+    for(int i=0;i<s.size();i++)
+    {
+        if(s[i]=='1' && i==0)
+        {
+            one=1;
         }
-
-         int cnt2=(mx2/2);
-        if(mx2%2==0 && mx2>0){
-            cnt2--;
+        else if(s[i]=='1')
+        {
+             one=1;
+             if(four<=2)
+             {
+                four=0;
+             }
+             else if(four>2){
+                ans="NO";
+                break;
+             }
         }
-
-        if(cnt1>mi1 || cnt2>mi2){
-            no;
+        else if(s[i]=='4' && i!=0){
+            four++;
         }
         else{
-            yes;
+            ans="NO";
+            break;
         }
-        
-
-
     }
+    if(four>2){
+        ans="NO";
+    }
+    cout<<ans<<endl;
 }
