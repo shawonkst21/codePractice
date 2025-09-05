@@ -38,41 +38,33 @@ void faster() {
 
 int32_t main() {
     faster();
-    string s;
-    cin>>s;
+    testCase{
+        int a,b;
+        cin>>a>>b;
+        int z=0;
 
-    int one=0;
-    int four=0;
-    string ans="YES";
+        int rem=b%4;
 
-    for(int i=0;i<s.size();i++)
-    {
-        if(s[i]=='1' && i==0)
+        if(rem==1)
         {
-            one=1;
+            z-=b;
         }
-        else if(s[i]=='1')
+        else if(rem==2)
         {
-             one=1;
-             if(four<=2)
-             {
-                four=0;
-             }
-             else if(four>2){
-                ans="NO";
-                break;
-             }
+            z=1;
         }
-        else if(s[i]=='4' && i!=0){
-            four++;
+        else if(rem==3)
+        {
+            z=b+1;
         }
-        else{
-            ans="NO";
-            break;
+
+        if(a&1)
+        {
+            cout<<a-z<<endl;
+        }
+        else
+        {
+            cout<<a+z<<endl;
         }
     }
-    if(four>2){
-        ans="NO";
-    }
-    cout<<ans<<endl;
 }
