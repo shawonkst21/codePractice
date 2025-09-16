@@ -39,32 +39,24 @@ void faster() {
 int32_t main() {
     faster();
     testCase{
-        int a,b;
-        cin>>a>>b;
-        int z=0;
+        int n;
+        cin>>n;
+        vi v(n);
+        input(v);
 
-        int rem=b%4;
-
-        if(rem==1)
+        vi prefix(n);
+        prefix[0]=v[0];
+        for(int i=1;i<n;i++)
         {
-            z-=b;
+            prefix[i]=v[i]+prefix[i-1];
         }
-        else if(rem==2)
+        if(prefix[n-1]%3!=0)
         {
-            z=1;
+            cout<<'0'<<' '<<'0'<<endl;
         }
-        else if(rem==3)
-        {
-            z=b+1;
-        }
-
-        if(a&1)
-        {
-            cout<<a-z<<endl;
-        }
-        else
-        {
-            cout<<a+z<<endl;
+        else{
+            
+            cout<<1<<' '<<2<<endl;
         }
     }
 }
